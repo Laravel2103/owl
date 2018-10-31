@@ -113,6 +113,4 @@ Route::prefix("admin")->middleware('adminmiddle')->group(function(){
 	Route::get('editcommentview{id}','AdminController@EditCommentView')->name('editcommetview');
 	//Route sua 1 binh luan
 	Route::post('editcomment','AdminController@EditComment')->name('editcomment');
-	
-	ưeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
 });
