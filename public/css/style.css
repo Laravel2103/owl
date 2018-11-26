@@ -1,0 +1,144 @@
+.navbar-brand a{
+    color: white !important;
+}
+.dropdown-menu::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 10%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+}
+.dropdown-menu{
+	width: 400px;
+}
+a:link{
+	text-decoration: none;
+}
+#status{
+	border: none;
+	resize: none;
+	font-size: 18px;
+}
+#status:focus{
+	outline: none;
+}
+#status::after {
+    content: " ";
+    position: absolute;
+    top: 100%;  /* At the top of the tooltip */
+    left: 10%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+}
+.thanh{
+     transition: width 3s;
+}
+.thanh:hover{
+    width: 90% !important;
+}
+#myModal
+{
+    padding-right: 0px !important;
+}
+body{
+    font-family: inherit,'lucida grande',tahoma,verdana,arial,"hiragino kaku gothic pro",meiryo,"ms pgothic",sans-serif;
+	cursor:  url("../img/pointer.png"), auto;
+    /*word-spacing: -1.7px;*/
+    font-size: 15px !important;
+	background-color: rgb(233,243,252);
+}
+a:hover,input[type="submit"]{
+	cursor: url("../img/hover.png"),auto;
+}
+
+
+input[type=text]:focus{
+    outline: none;
+}
+.bg-owl{
+    background-color: #91B9E8 !important;
+}
+.tag{
+    font-size: 12px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.tag:hover{
+    background-color: #91B9E8 !important;
+}
+.list-friends-online{
+    position: fixed;
+    top: 50px;
+    right: 0px;
+    width: 16%;
+    height: 100%;
+}
+.friends-online:hover{
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+.find-friends-online{
+    border: none;
+}
+
+.name-in-comment{
+    line-height: 0.7;
+}
+.time-of-comment{
+    font-size: 9px;
+}
+.btn-in-status:hover{
+    background-color: #f8f9fa;
+}
+@media screen and (max-width: 480px) {
+    body,textarea,input[type=text],input[type=submit],button{
+        font-size: 10px;
+    }
+}
+.w-55{
+    width: 55% !important;
+}
+.w-70{
+    width: 70% !important;
+}
+.w-80{
+    width: 80% !important;
+}
+.w-85{
+    width: 85% !important;
+}
+.w-90{
+    width: 90% !important;
+}
+.w-110{
+    width: 110% !important;
+}
+
+@media screen and (max-width: 1200px) {
+    .list-friends-online{
+        width: 9%;
+        text-align: center;
+    }
+    .online-button{
+        position: absolute;
+        top: 0px;
+        left: 50px;
+    }
+}
+
+@media screen and (max-width: 1126px) {
+    .list-friends-online{
+       display: none !important;
+    }
+}
+form-control{
+    outline: none !important;
+}
