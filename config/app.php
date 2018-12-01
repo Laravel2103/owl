@@ -160,6 +160,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
+        //khai báo class phần chức năng đăng nhập = các phuong thức khác như facebook
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -209,7 +211,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        //khai báo class phần chức năng đăng nhập = các phuong thức khác như facebook
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

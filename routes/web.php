@@ -22,6 +22,14 @@ Route::get("testr","UserController@test");
 
 // Route dang nhap
 Route::post('login','UserController@Login')->name('Login');
+
+// Route dang nhap thong qua facebook
+Route::get('facebook/redirect', 'UserController@redirectToProvider');
+Route::get('facebook/callback', 'UserController@handleProviderCallback');
+// Route dang nhap thong qua email
+Route::get('google/redirect', 'UserController@redirectToProviderGoogle');
+Route::get('google/callback', 'UserController@handleProviderCallbackGoogle');
+
 // Route dang ky
 Route::post('register','UserController@Register')->name('Register');
 // Route dang tai mot status
