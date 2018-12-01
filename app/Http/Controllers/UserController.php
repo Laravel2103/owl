@@ -154,5 +154,47 @@ class UserController extends Controller
 
         return 0;
     }
+
+    //Dang tai mot comment vao bai viet
+    public function PostComment($idstt, $content)
+    {
+        $db = new Comments;
+        $db->author = session('iduser');
+        $db->content = $content;
+        $db->idstt = $idstt;
+        $db->time = date('d-m-Y H:i:s');
+        $db->save();
+
+        $authorname = session('username');
+
+        
+        //return view('users.index.comment');
+        $comment = "
+        <div class='row mt-2 pr-3'>
+        <div class='col-2 pr-1'>
+            <img src='img/avatar.png' class='img-thumbnail w-90 rounded'>
+        </div>
+        <div class='col-10 pr-4 w-100 pb-1 bg-light border rounded  comment-content'>
+            <div class='row justify-content-between'>
+                <div class='col-10 col-sm-10 col-lg-11'>
+                    <a href='' class='name-in-comment'>".$authorname."</a>:
+                    <span class='text-secondary time-of-comment'> Vừa xong. <i class='fa fa-clock-o'></i></span>
+                </div>
+                <div class='col-1 col-sm-1 col-lg-1 align-self-end'>
+                    <i class='fa fa-ellipsis-h align-middle'></i>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='col-12 text-justify pr-2'>
+                    <span>".$db->content."</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+        ";
+        return $comment;
+    }
     
 }

@@ -28,3 +28,5 @@ Route::post('register','UserController@Register')->name('Register');
 Route::post('upstt','UserController@UpStt')->name('UpStt');
 // Danh gia mot bai viet 
 Route::get('confirm{idstt}/{conf}','UserController@Confirm')->name('Confirm');
+// Dang tai mot comment
+Route::get('postcomment{idstt}/{content}','UserController@PostComment')->name('PostComment');

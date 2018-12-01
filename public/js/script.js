@@ -16,4 +16,7 @@ $(document).ready(function(){
 	$("#logo").mouseleave(function(){
 		$(this).attr("src","img/logo8.png");
 	});
+	$("#btnaddfriend").click(function(){
+		$("#showaddfriend").toggle();
+	});
 });

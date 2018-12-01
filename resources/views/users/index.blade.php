@@ -208,27 +208,6 @@
 							@if($stt->images != '')
 								<img src="img/{{$stt->images}}" alt="" class="img-fluid border-top border-bottom">
 							@endif
-
-							@if($stt->lat != '')
-								<div id="googleMapStatus{{$stt->id}}"></div>
-								<script type="text/javascript">
-									$("#googleMapStatus{{$stt->id}}").css({"width": "100%", "height": "200px", "margin-bottom": "10px"});
-									var mapDiv = document.getElementById('googleMapStatus{{$stt->id}}');
-									
-									var lat = {{$stt->lat}};
-									var lon = {{$stt->lon}};
-									var options = { 
-										zoom:17,
-										center:{lat:lat,lng:lon}
-									}
-									var map=new google.maps.Map(mapDiv, options);
-
-									var marker = new google.maps.Marker({
-										position:{lat:lat,lng:lon},
-										map:map
-									});
-								</script>
-							@endif
 						</div>
 					</div>
 					<div class="pb-3 pr-3 pl-3">
@@ -340,6 +319,7 @@
 									$.get("postcomment{{$stt->id}}/"+content,
 										function(data){
 											$("#comment{{$stt->id}}").prepend(data);
+											// alert(data);
 										});
 										$("#cmtcontent{{$stt->id}}").val('');	
 											
@@ -609,10 +589,5 @@
 		</div> -->
 		<!-- End Chatbox -->
 
-		<!-- Javascript -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
-		<!-- End Javascript -->
 		@endsection("content")
