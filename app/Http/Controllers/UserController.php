@@ -12,6 +12,9 @@ use App\Status;
 use App\Comments;
 use App\Reviews;
 
+//facebook,google
+use Socialite;
+
 class UserController extends Controller
 {
     //
@@ -55,6 +58,134 @@ class UserController extends Controller
         else
             return redirect()->route('owl-index',['error'=>'Tài khoản hoặc mật khẩu không đúng!']);
         
+    }
+
+    //Xử lý đăng nhập bằng facebook 
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::with('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $user = Socialite::with('facebook')->user();
+        
+        
+        // $social = Social::where('provider_user_id',$user->id)->where
+        //     ('pravider','facebook')->first();
+        // if($social){
+        //     $u = User::where('email',$user->email)->first();
+        //     Auth::lo
+        // }
+        
+        //Kiem tra co tai khoan trong csdl chua
+        $login = Users::where([
+            ['email','=',$user->email],
+            ['password','=',$user->id],
+            ])->first();
+        //Neu co roi thi tao session va den trang index
+        if(!empty($login))
+        {
+            session()->put('iduser',$login->id);
+            session()->put('username',$login->username);
+            session()->put('email',$login->email);
+            session()->put('password',$login->password);
+            return redirect()->route('owl-index');
+        }
+
+        else
+        {
+            //Them vao co so du lieu
+            $db = new Users;
+            $db->username = $user->name;
+            $db->email = $user->email;
+            $db->avatar = 'avatar.png';
+            $db->password = $user->id;
+            $db->save();
+
+            $login = Users::where([
+            ['email','=',$user->email],
+            ['password','=',$user->id],
+            ])->first();
+            //Neu co roi thi tao session va den trang index
+            if(!empty($login))
+            {
+                session()->put('iduser',$login->id);
+                session()->put('username',$login->username);
+                session()->put('email',$login->email);
+                session()->put('password',$login->password);
+                return redirect()->route('owl-index');
+            }
+        }
+        // $user->token;
+    
+    }
+
+    //Xử lý đăng nhập bằng google
+
+    public function redirectToProviderGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallbackGoogle()
+    {
+        $user = Socialite::driver('google')->user();
+              
+        //Kiem tra co tai khoan trong csdl chua
+        $login = Users::where([
+            ['email','=',$user->email],
+            ['password','=',$user->id],
+            ])->first();
+        //Neu co roi thi tao session va den trang index
+        if(!empty($login))
+        {
+            session()->put('iduser',$login->id);
+            session()->put('username',$login->username);
+            session()->put('email',$login->email);
+            session()->put('password',$login->password);
+            return redirect()->route('owl-index');
+        }
+
+        else
+        {
+            //Them vao co so du lieu
+            $db = new Users;
+            $db->username = $user->name;
+            $db->email = $user->email;
+            $db->avatar = 'avatar.png';
+            $db->password = $user->id;
+            $db->save();
+
+            $login = Users::where([
+            ['email','=',$user->email],
+            ['password','=',$user->id],
+            ])->first();
+            //Neu co roi thi tao session va den trang index
+            if(!empty($login))
+            {
+                session()->put('iduser',$login->id);
+                session()->put('username',$login->username);
+                session()->put('email',$login->email);
+                session()->put('password',$login->password);
+                return redirect()->route('owl-index');
+            }
+        }
     }
     //Xu ly thong tin dang ky cua nguoi dung
     public function Register(Request $request)

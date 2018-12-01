@@ -35,4 +35,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    //khai báo id trang quản lý trong facebook
+    'facebook' => [
+        'client_id' => '302329893933910',  
+        'client_secret' => '589229750f6769a64f04a2e6ee4f0ce2',
+        'redirect' => 'http://localhost/owl/public/facebook/callback',
+    ],
+    //khai báo id trang quản lý trong API google
+    'google' => [
+        'client_id' => '808500464502-httimnlj7huk7i0f7r9i0gfee1bdp8ge.apps.googleusercontent.com',
+        'client_secret' => '044SEcqDvrZb7SEbeMwmxSyt',
+        'redirect' => 'http://localhost/owl/public/google/callback',
+    ],
 ];

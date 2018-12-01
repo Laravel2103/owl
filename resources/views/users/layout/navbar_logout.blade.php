@@ -49,6 +49,11 @@
 						<div class="col-12 mt-3">
 							<input type="submit" name="submit" class="btn btn-primary float-right" value="Đăng nhập">
 						</div>
+						
+						<li>
+							<a href="{{url('facebook/redirect')}}" class="btn btn-primary" style="color: rgb(31,118,197);">Facebook</a>
+							<a href="{{url('google/redirect')}}" class="btn btn-primary" style="color: rgb(221,7,7);">Google</a>
+						</li>
 					</div>
 				</div>
 			</div>
