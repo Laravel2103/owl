@@ -114,7 +114,12 @@
 								<input type="password" class="form-control border-left-0" name="repassword" placeholder="Nhập lại mật khẩu">
 							</div>
 						</div>
+
 						<div class="col-12 mt-3">
+							<!--  Hiển thị thông tin trạng thái tạo bài viết -->
+					    @if (session('status'))
+					        <div class="alert alert-info">{{session('status')}}</div>
+					    @endif
 							<input type="submit" name="submit" class="btn btn-primary float-right" value="Đăng ký">
 						</div>
 					</div>

@@ -3,7 +3,7 @@
 @section("content")
 <!-- Body -->
 <div class="row w-100">
-
+	
 	<!-- MenuBar -->
 	<div class="col-lg-2 col-xl-2 d-none d-sm-none d-lg-block pr-0 ml-5 pl-5 mt-5 pt-4">
 		<ul class="list-group shadow-sm">
@@ -36,6 +36,7 @@
 						</li>
 					</div>
 				</ul>
+
 			</div>
 			<!-- End MenuBar -->
 
@@ -43,41 +44,47 @@
 			<div class="col-lg-5 col-xl-5 col-sm-12 mt-5 pt-4 ml-lg-0 mr-lg-0 ml-sm-5">
 				<form action="{{route('UpStt')}}" method="post" enctype="multipart/form-data">
 					{{ csrf_field() }}
-					<div class="bg-light rounded shadow-sm border">
-						<div class="row border-bottom mr-1 ml-1">
-							<div class="col-4 col-sm-4 border-right p-1 pl-2 text-center">
-								<a href="" class=""><i class="fa fa-pencil"></i> Đăng bài viết</a>
+					@if(empty(session('iduser')))
+							<div class="alert alert-warning shadow-sm mt-3">
+								<strong>Thông báo!</strong> <span class="" data-toggle="modal" data-target="#myModal">Đăng nhập</span> để có thể đăng tải bài viết.
 							</div>
-							<div class="col-5 col-sm-5 border-right p-1 pl-2 text-center">
-								<a href=""><i class="fa fa-image"></i> Album ảnh/ video</a>
+					@else
+						<div class="bg-light rounded shadow-sm border">
+							<div class="row border-bottom mr-1 ml-1">
+								<div class="col-4 col-sm-4 border-right p-1 pl-2 text-center">
+									<a href="" class=""><i class="fa fa-pencil"></i> Đăng bài viết</a>
+								</div>
+								<div class="col-5 col-sm-5 border-right p-1 pl-2 text-center">
+									<a href=""><i class="fa fa-image"></i> Album ảnh/ video</a>
+								</div>
+								<div class="col-3 col-sm-3 p-1 pl-2 text-center">
+									<a href=""><i class="fa fa-video-camera"></i> Trực tiếp</a>
+								</div>
 							</div>
-							<div class="col-3 col-sm-3 p-1 pl-2 text-center">
-								<a href=""><i class="fa fa-video-camera"></i> Trực tiếp</a>
+							<div class="row bg-white ml-1 mr-1 border-bottom mb-2">
+								<div class="col-md-2 col-sm-2 col-2 align-self-center pr-0">
+									<img src="img/avatar.jpg" width="38px" class="rounded-circle img-fluid">
+								</div>
+								<div class="col-md-10 col-sm-10 col-10 pl-0 ">
+									<textarea class="w-100 pl-0 pr-3 pt-3 pb-3" id="status" placeholder="Bạn đang nghĩ gì vậy?" rows="1" onkeyup="getVal();" name="contentstt"></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="row bg-white ml-1 mr-1 border-bottom mb-2">
-							<div class="col-md-2 col-sm-2 col-2 align-self-center pr-0">
-								<img src="img/avatar.jpg" width="38px" class="rounded-circle img-fluid">
-							</div>
-							<div class="col-md-10 col-sm-10 col-10 pl-0 ">
-								<textarea class="w-100 pl-0 pr-3 pt-3 pb-3" id="status" placeholder="Bạn đang nghĩ gì vậy?" rows="1" onkeyup="getVal();" name="contentstt"></textarea>
-							</div>
-						</div>
-				<!-- <div class="row ml-1 mr-1 mb-2 justify-content-center">
-					<div class="col-4 bg-white rounded ml-1 border p-1">Ảnh/video</div>
-					<div class="col-3 bg-white rounded ml-1 border p-1"><i class="fa fa-code"></i> Code</div>
-					<div class="col-3 bg-white rounded ml-1 border p-1">Cảm xúc</div>
-				</div> -->
-				<div class="row ml-1 mr-1 mb-2 justify-content-center">
-					<input type="text" id="lat" name="lat" style="display:none">
-					<input type="text" id="lon" name="lon" style="display:none">
-					<input type="file" id="file" name="imagestatus" style="display:none">
-					<div class="col-lg-3 col-2 bg-white rounded ml-1 border p-1"><label for="file" class="btn btn-primary w-100 mb-0"><i class="fas fa-image"></i><span class="d-none d-lg-inline"> Ảnh/video</span></label></div>
-					<div class="col-lg-2 col-2 bg-white rounded ml-1 border p-1"><span class="btn btn-primary w-100" id="btn-add-position"><i class="fas fa-code"></i><span class="d-none d-lg-inline"> Code</span></span></div>
-					<div class="col-lg-3 col-2 bg-white rounded ml-1 border p-1"><span class="btn btn-primary w-100"><i class="fa fa-tag"></i><span class="d-none d-lg-inline"> Gắn thẻ</span></span></div>
-					<div class="col-lg-3 col-5 rounded ml-1  p-0 align-self-center pl-3"><input type="submit" class="btn btn-primary w-100 h-100 align-middle shadow-sm" value="Đăng bài"></div>
+					<!-- <div class="row ml-1 mr-1 mb-2 justify-content-center">
+						<div class="col-4 bg-white rounded ml-1 border p-1">Ảnh/video</div>
+						<div class="col-3 bg-white rounded ml-1 border p-1"><i class="fa fa-code"></i> Code</div>
+						<div class="col-3 bg-white rounded ml-1 border p-1">Cảm xúc</div>
+					</div> -->
+					<div class="row ml-1 mr-1 mb-2 justify-content-center">
+						<input type="text" id="lat" name="lat" style="display:none">
+						<input type="text" id="lon" name="lon" style="display:none">
+						<input type="file" id="file" name="imagestatus" style="display:none">
+						<div class="col-lg-3 col-2 bg-white rounded ml-1 border p-1"><label for="file" class="btn btn-primary w-100 mb-0"><i class="fas fa-image"></i><span class="d-none d-lg-inline"> Ảnh/video</span></label></div>
+						<div class="col-lg-2 col-2 bg-white rounded ml-1 border p-1"><span class="btn btn-primary w-100" id="btn-add-position"><i class="fas fa-code"></i><span class="d-none d-lg-inline"> Code</span></span></div>
+						<div class="col-lg-3 col-2 bg-white rounded ml-1 border p-1"><span class="btn btn-primary w-100"><i class="fa fa-tag"></i><span class="d-none d-lg-inline"> Gắn thẻ</span></span></div>
+						<div class="col-lg-3 col-5 rounded ml-1  p-0 align-self-center pl-3"><input type="submit" class="btn btn-primary w-100 h-100 align-middle shadow-sm" value="Đăng bài"></div>
+					</div>
 				</div>
-			</div>
+			@endif
 		</form>
 		@foreach($status as $stt)
 
@@ -427,10 +434,8 @@
 			<div class="col-12 text-info text-center">
 				<h4>Gợi ý kết bạn</h4>
 			</div>
-
-			@foreach 
-				
-			<?php endforeach ?>
+			
+			@foreach($GoiYKetBan as $kb)
 			<!-- Thong tin mot nguoi muon ket ban -->
 			<div class="col-12 bg-white rounded-top border">
 				<div class="row">
@@ -438,7 +443,7 @@
 						<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
 					</div>
 					<div class="col-5 pl-0 align-self-center">
-						<a href="" class="align-bottom">Naruto</a><br>
+						<a href="" class="align-bottom">{{$kb->username}}</a><br>
 						<span class="align-top" style="font-size: 11px">2 bạn chung</span>
 					</div>
 					<div class="col-2 align-self-center pl-0">
@@ -447,9 +452,10 @@
 				</div>
 			</div>
 			<!-- Ket thuc thong tin mot nguoi muon ket ban -->
+			@endforeach
 
 			<!-- Thong tin mot nguoi muon ket ban -->
-			<div class="col-12 bg-white rounded-bottom border border-top-0">
+			<!-- <div class="col-12 bg-white rounded-bottom border border-top-0">
 				<div class="row">
 					<div class="col-2 m-2 pl-0 pr-0">
 						<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
@@ -462,7 +468,7 @@
 						<button class="btn btn-success p-1">Kết bạn</button>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- Ket thuc thong tin mot nguoi muon ket ban -->
 		</div>
 		<!-- Ket thuc khung goi y ket ban -->

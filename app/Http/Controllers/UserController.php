@@ -30,11 +30,11 @@ class UserController extends Controller
         $author = Users::all();
         $reviews = Reviews::all();
         $member = Users::where([
-            ['_id','!=',session('iduser');],
+            ['_id','!=',session('iduser')],
         ])->take(5)->get();
         
 
-        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'$member]);
+        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member]);
 
     }
      //Xu ly thong tin dang nhap cua nguoi dung
@@ -199,15 +199,22 @@ class UserController extends Controller
         $username = $request->username;
         $email = $request->email;
         $password = $request->password;
-
-        //Them vao co so du lieu
-        $db = new Users;
-        $db->username = $username;
-        $db->email = $email;
-        $db->avatar = 'avatar.png';
-        $db->password = $password;
-        $db->save();
-
+        $repassword = $request->repassword;
+        if($password == $repassword && $password != "")
+        {
+            //Them vao co so du lieu
+            $db = new Users;
+            $db->username = $username;
+            $db->email = $email;
+            $db->avatar = 'avatar.png';
+            $db->password = $password;
+            $db->save();
+        }
+        else
+        {
+             $request->session()->flash('status', 'Đăng ký không hợp lệ!');
+             return redirect()->route('owl-index');
+        }
         return redirect()->route('owl-index');
     }
     //Dang xuat tai khoan
@@ -228,17 +235,18 @@ class UserController extends Controller
         {
             $imagestatus = "";
         }
+        if ( session('iduser')!= null){
+            $content = $request->contentstt;
 
-        $content = $request->contentstt;
+            $db = new Status;
+            $db->content = $content;
+            $db->rate = 100;
+            $db->images = $imagestatus;
+            $db->author = session('iduser');
+            $db->time = date('d-m-Y H:i:s');
 
-        $db = new Status;
-        $db->content = $content;
-        $db->rate = 100;
-        $db->images = $imagestatus;
-        $db->author = session('iduser');
-        $db->time = date('d-m-Y H:i:s');
-
-        $db->save();
+            $db->save();
+        }
         return redirect()->route('owl-index');
     }
     // Danh gia mot bai viet
@@ -273,7 +281,7 @@ class UserController extends Controller
         //     else
         //         $check->rate = ($check->rate + 0)/2;
         // }
-
+        
         if(!empty($check))
         {
             Reviews::where([
@@ -281,7 +289,7 @@ class UserController extends Controller
                 ['idstt','=',$idstt],
             ])->delete();
         }
-
+        
         $db = new Reviews;
         $db->rev = $conf;
         $db->idstt = $idstt;
