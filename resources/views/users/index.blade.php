@@ -427,6 +427,10 @@
 			<div class="col-12 text-info text-center">
 				<h4>Gợi ý kết bạn</h4>
 			</div>
+
+			@foreach 
+				
+			<?php endforeach ?>
 			<!-- Thong tin mot nguoi muon ket ban -->
 			<div class="col-12 bg-white rounded-top border">
 				<div class="row">

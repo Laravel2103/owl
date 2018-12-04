@@ -38,3 +38,5 @@ Route::post('upstt','UserController@UpStt')->name('UpStt');
 Route::get('confirm{idstt}/{conf}','UserController@Confirm')->name('Confirm');
 // Dang tai mot comment
 Route::get('postcomment{idstt}/{content}','UserController@PostComment')->name('PostComment');
+// Tao ban ban be
+Route::get('taobanbe','UserController@taobanbe');
