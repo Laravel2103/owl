@@ -50,10 +50,10 @@
 							<input type="submit" name="submit" class="btn btn-primary float-right" value="Đăng nhập">
 						</div>
 						
-						<li>
-							<a href="{{url('facebook/redirect')}}" class="btn btn-primary" style="color: rgb(31,118,197);">Facebook</a>
-							<a href="{{url('google/redirect')}}" class="btn btn-primary" style="color: rgb(221,7,7);">Google</a>
-						</li>
+						<div class="col-12 mt-3">
+							<a href="{{url('facebook/redirect')}}" class="btn btn-primary" style="color: white;"><i class="fab fa-facebook-f"></i> Facebook</a>
+							<a href="{{url('google/redirect')}}" class="btn btn-primary" style="color: #dc3545;"><i class="fab fa-google"></i> Google</a>
+						</div>
 					</div>
 				</div>
 			</div>

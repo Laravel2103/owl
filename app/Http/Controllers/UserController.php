@@ -64,7 +64,7 @@ class UserController extends Controller
             return redirect()->route('owl-index',['error'=>'Tài khoản hoặc mật khẩu không đúng!']);
         
     }
-
+    
     //Xử lý đăng nhập bằng facebook 
     /**
      * Redirect the user to the GitHub authentication page.
@@ -218,7 +218,7 @@ class UserController extends Controller
         return redirect()->route('owl-index');
     }
     //Dang xuat tai khoan
-    public function logout(Request $request)
+    public function Logout(Request $request)
     {
         $request->session()->flush();
         return redirect()->route('owl-index');
@@ -350,5 +350,41 @@ class UserController extends Controller
         return "ThanhCong";
     }
     //liet ke nguoi chua ket ban
+    //
+    //
+    // Gui mot loi moi ket ban
+    public function addfriend($id_user)
+    {
+        //$ss = session('iduser');
+        $db = new Friends;
+        $db->user1 = session('iduser');
+        $db->user2 = $id_user;
+        $db->agree = false;
+        $db->save();
+
+        $friends = Friends::where('user1','!=',session('iduser'))->orwhere('user1','!=',session('iduser'))->get();
+        
+        // $member = Users::where([
+        //     ['_id','!=',session('iduser')],
+        //     ['_id','!=',$id_user]
+        // ])->take(5)->get();
+
+
+        return '123';
+    }
+
+    public function Profile()
+    {
+        //$user = Users::where('id',$id_user)->first;
+        $db = Status::orderBy('time','desc')->get();
+        $comment = Comments::all();
+        $author = Users::all();
+        $reviews = Reviews::all();
+        $member = Users::where([
+            ['_id','!=',session('iduser')],
+        ])->take(5)->get();
+        
+        return view('users.profile',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member]);
+    }
     
 }

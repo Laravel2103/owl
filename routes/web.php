@@ -22,6 +22,8 @@ Route::get("testr","UserController@test");
 
 // Route dang nhap
 Route::post('login','UserController@Login')->name('Login');
+// Route logout
+Route::get('logout','UserController@Logout')->name('Logout');
 
 // Route dang nhap thong qua facebook
 Route::get('facebook/redirect', 'UserController@redirectToProvider');
@@ -40,3 +42,7 @@ Route::get('confirm{idstt}/{conf}','UserController@Confirm')->name('Confirm');
 Route::get('postcomment{idstt}/{content}','UserController@PostComment')->name('PostComment');
 // Tao ban ban be
 Route::get('taobanbe','UserController@taobanbe');
+// Ket ban voi mot nguoi ban
+Route::get('addfriend{id_user}','UserController@AddFriend')->name('AddFriend');
+// Trang ca nhan
+Route::get('profile/id','UserController@Profile')->name('Profile');
