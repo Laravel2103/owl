@@ -37,12 +37,13 @@
 	</div>
 	<!-- End MenuBar -->
 
+	
 	<div class="col-lg-7 mt-5 pt-4">
 		<div style="position:relative">
-			<img src="img/banner3.jpg" alt="" class="img-fluid">
-			<span style="position: absolute; bottom: 10px; left: 10px;">Xuân Trường</span>
+			<img src="img/banner3.jpg" alt="" class="img-fluid border">
+			<span style="position: absolute; bottom: 10px; left: 20px; font-size: 30px; font-weight:bold;">Xuân Trường</span>
 		</div>
-		<div class="row">
+		<div class="row mr-0">
 			<!-- NewFeed -->
 			<div class="col-lg-8 col-xl-8 col-sm-12 mt-3 ml-lg-0 mr-lg-0 ml-sm-5">
 				<!-- Khung soan thao bai viet -->

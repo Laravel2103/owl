@@ -29,12 +29,16 @@ class UserController extends Controller
         $comment = Comments::all();
         $author = Users::all();
         $reviews = Reviews::all();
-        $member = Users::where([
-            ['_id','!=',session('iduser')],
-        ])->take(5)->get();
+        $friends = Friends::where('user1',session('iduser'))->orwhere('user2',session('iduser'))->get();
+        $member = Users::all();
+       
+        $addfriends = Friends::where([
+            ['user2',session('iduser')],
+            ['agree',false],
+        ])->get();
         
 
-        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member]);
+        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends]);
 
     }
      //Xu ly thong tin dang nhap cua nguoi dung
@@ -252,19 +256,6 @@ class UserController extends Controller
     // Danh gia mot bai viet
     public function Confirm($idstt, $conf)
     {
-        // $status = Status::where('id','=',$idstt)->first();
-        // if($conf == 'good')
-        // {
-        //     $status->rate = ($status->rate + 100)/2;
-        // }
-        // else
-        // {
-        //     if($conf == 'normal')
-        //         $status->rate = ($status->rate + 50)/2;
-        //     else
-        //         $status->rate = ($status->rate + 0)/2;
-        // }
-
 
         $check = Reviews::where([
             ['iduser','=',session('iduser')],
@@ -295,6 +286,20 @@ class UserController extends Controller
         $db->idstt = $idstt;
         $db->iduser = session('iduser');
         $db->save();
+
+        //$status = Status::where('id','=',$idstt)->first();
+        if($conf == 'good')
+        {
+            Status::where('_id',$idstt)->update(['rate'=>90]);
+        }
+        if($conf == 'normal')
+        {
+            Status::where('_id',$idstt)->update(['rate'=>50]);
+        }
+        if($conf == 'bad')
+        {
+            Status::where('_id',$idstt)->update(['rate'=>10]);
+        }
 
         return 0;
     }
@@ -376,7 +381,7 @@ class UserController extends Controller
     public function Profile()
     {
         //$user = Users::where('id',$id_user)->first;
-        $db = Status::orderBy('time','desc')->get();
+        $db = Status::where('author',session('iduser'))->orderBy('time','desc')->get();
         $comment = Comments::all();
         $author = Users::all();
         $reviews = Reviews::all();
@@ -385,6 +390,14 @@ class UserController extends Controller
         ])->take(5)->get();
         
         return view('users.profile',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member]);
+    }
+
+    // Chap nhan mot loi moi ket ban
+    public function AgreeFriend($id_friend)
+    {
+        Friends::where('_id',$id_friend)->update(['agree'=>true]);
+
+        return redirect()->route('owl-index');
     }
     
 }

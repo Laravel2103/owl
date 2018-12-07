@@ -88,7 +88,7 @@
 			<div class="pt-3 pr-3 pl-3">
 				<div class="row">
 					<div class="col-2 pr-0 avatar-post align-self-center">
-						<img src="img/avatar.png" alt="" class="rounded-circle img-fluid shadow-sm w-75">
+						<img src="img/avatar.png" alt="" class="rounded-circle img-fluid w-75">
 					</div>
 					<div class="col-8 pl-0">
 						@foreach($author as $at)
@@ -217,7 +217,7 @@
 				<div class="row m-2">
 					<div class="col-12 pl-0 pr-0">
 						<div class="progress">
-							<div class="progress-bar" style="width:70%">Hay</div>
+							<div class="progress-bar" id="rate{{$stt->id}}" style="width:{{$stt->rate}}%">Hay</div>
 						</div>
 					</div>
 				</div>
@@ -264,9 +264,11 @@
 					$("#good{{$stt->id}}").click(function(){
 						$.get("confirm{{$stt->id}}/good",
 							function(data){
+							$("#rate{{$stt->id}}").animate({width: '90%'});
 							//alert(data);
 							$("#danhgiabtn{{$stt->id}}").html("<i class='fas fa-grin-hearts fa-lg text-success'></i><span class='text-success font-weight-bold'> Rất hay</span>");
 							//$("#comment{{$stt->id}}").prepend(data);
+							
 						});
 					});
 					$("#normal{{$stt->id}}").click(function(){
@@ -275,6 +277,7 @@
 							//alert(data);
 							$("#danhgiabtn{{$stt->id}}").html("<i class='fas fa-grin-alt fa-lg text-warning'></i><span class='text-warning font-weight-bold'> Bình thường</span>");
 							//$("#comment{{$stt->id}}").prepend(data);
+							$("#rate{{$stt->id}}").animate({width: '50%'});
 						});
 					});
 					$("#bad{{$stt->id}}").click(function(){
@@ -283,6 +286,7 @@
 							//alert(data);
 							$("#danhgiabtn{{$stt->id}}").html("<i class='fas fa-tired fa-lg text-danger'></i><span class='text-danger font-weight-bold'> Dở tệ</span>");
 							//$("#comment{{$stt->id}}").prepend(data);
+							$("#rate{{$stt->id}}").animate({width: '10%'});
 						});
 					});
 					$("#danhgiabtn{{$stt->id}}").mouseenter(function(){
@@ -293,14 +297,12 @@
 							$("#danhgiashow{{$stt->id}}").hide();
 						});
 					});
-					$("#comment-btn{{$stt->id}}").click(function(){
-						$("#comment-box{{$stt->id}}").slideToggle();
-					});
+					
 				</script>
 				<div id="comment-box{{$stt->id}}">
 
 					@if(empty(session('iduser')))
-					<div class="alert alert-warning shadow-sm mt-3">
+					<div class="alert alert-warning mt-3">
 						<strong>Thông báo!</strong> <span class="" data-toggle="modal" data-target="#myModal">Đăng nhập</span> để có thể bình luận bài viết.
 					</div>
 					@else
@@ -325,6 +327,12 @@
 							$("#cmtcontent{{$stt->id}}").val('');	
 
 						});
+						$("#comment-btn{{$stt->id}}").click(function(){
+							
+							$("#comment-box{{$stt->id}}").slideToggle();
+							$("#cmtcontent{{$stt->id}}").focus();
+						});
+						
 					</script>
 					@endif
 					<div id="comment{{$stt->id}}">
@@ -428,6 +436,8 @@
 				<h4>Gợi ý kết bạn</h4>
 			</div>
 			@foreach($GoiYKetBan as $kb)
+			@foreach($friends as $fr)
+			@if($kb->id != $fr->user1 && $kb->id != $fr->user2 && $kb->id != session('iduser'))
 			<!-- Thong tin mot nguoi muon ket ban -->
 			<div class="col-12 bg-white rounded-top border" id="box{{$kb->id}}">
 				<div class="row">
@@ -452,6 +462,8 @@
 				});
 			</script>
 			<!-- Ket thuc thong tin mot nguoi muon ket ban -->
+			@endif
+			@endforeach
 			@endforeach
 		</div>
 		<!-- Ket thuc khung goi y ket ban -->
@@ -492,6 +504,19 @@
 			<h5 class="d-block d-lg-block d-xl-none">Chatbox</h5>
 		</div>
 		<!-- Hien thi 1 ban be -->
+		
+		@foreach($friends as $fr)
+		@if($fr->user1 == session('iduser') && $fr->agree == true)
+		<?php
+			$id_friend = $fr->user2;
+		?>
+		@elseif($fr->user2 == session('iduser') && $fr->agree == true)
+		<?php
+			$id_friend = $fr->user1;
+		?>
+		@endif
+		@foreach($GoiYKetBan as $mb)
+		@if($mb->id == $id_friend)
 		<a href="">
 			<div class="row ml-0 friends-online">
 				<div class="col-12">
@@ -500,7 +525,7 @@
 							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
 						</div>
 						<div class="col-6 col-xl-6 pl-0 align-self-center d-none d-lg-none d-xl-block">
-							<span>Xuân Trường</span>
+							<span>{{$mb->username}}</span>
 						</div>
 						<div class="col-2 col-lg-2 col-xl-2 text-success align-self-center pl-0 online-button">
 							<i class="fa fa-circle"></i>
@@ -510,9 +535,12 @@
 			</div>
 		</a>
 		<!-- Ket thuc hien thi mot ban be -->
+		@endif
+		@endforeach
+		@endforeach
 
 		<!-- Hien thi 1 ban be -->
-		<a href="">
+		<!-- <a href="">
 			<div class="row ml-0 friends-online">
 				<div class="col-12">
 					<div class="row">
@@ -528,7 +556,7 @@
 					</div>
 				</div>
 			</div>
-		</a>
+		</a> -->
 
 		<div class="row align-items-end position-fixed bg-light p-0 ml-0" style=" bottom: 0px;">
 			<div class="col-2 pr-0 text-secondary align-middle pb-1">
@@ -545,23 +573,71 @@
 	<!-- End Body -->
 
 	<!-- Chatbox -->
-		<!-- <div class="position-fixed shadow-sm" style="bottom: 0px; right: 18%; z-index: 9; width: 260px;">
-			<div class="rounded-top bg-primary p-1 shadow-sm">
-				Xuan Truong
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<div class="position-fixed shadow-sm" style="bottom: 0px; right: 18%; width: 260px;box-shadow: 0 0px 5px 0 rgba(0, 0, 0, .20) !important;">
+			<div id="chats" class="rounded-top p-1 pl-2 border border-top-0 border-left-0  border-right-0" style="box-shadow: 0 4px 1px 0 rgba(0, 0, 0, .20) !important;background-color: #f5f6f7;z-index: 1032 !important">
+				<div class="row m-0">
+					<div class="col-9 pl-0 align-self-center">
+						<i class="fa fa-circle text-success" style="font-size: 8px;"></i> <span>Xuan Truong</span>
+					</div>
+					<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button> -->
+					<div class="col-1">
+						<i class="fas fa-video"></i>
+					</div>
+					<div class="col-1">
+						<i class="fas fa-times"></i>
+					</div>
+				</div>
 			</div>
-			<div class="bg-white p-1 shadow-sm" style="height: 300px">
-				qưewqe<br>
-				bg-primary<br>
-				qưewqe<br>
-				bg-primary<br>
-				qưewqe<br>
-				bg-primary<br>
+			<div class="bg-white p-1" style="height: 270px;overflow-y: auto;">
+				<!-- Tin nhan nguoi ban -->
+				<div class="row m-0">
+					<div class="col-2 p-0 align-self-end">
+						<img src="img/avatar.png" alt="" class="img-fluid rounded-circle w-80">
+					</div>
+					<div class="col-9">
+						<div class="row">
+								<div class="col-12 p-1 rounded" style="background-color: #f2f3f5">
+										Nhắn tin
+									</div>
+									<div class="col-12 p-1 rounded" style="margin-top: 1px; background-color: #f2f3f5">
+										Nhắn tin qweq q eqw qweqwe qwe qweqw qweqwe qweqwe qeqwqwe  ưqeqwe
+									</div>
+									<div class="col-12 p-1 rounded" style="margin-top: 1px; background-color: #f2f3f5">
+										Nhắn tin qweq q eqw qweqwe qwe qweqw qweqwe qweqwe qeqwqwe  ưqeqwe
+									</div>
+							
+						</div>
+					</div>
+				</div>
+				<!-- Tin nhan cua minh -->
+				<div class="row m-0 justify-content-end mt-2">
+					<div class="col-9">
+						<div class="row">
+								<div class="col-12 bg-primary p-1 text-white rounded">
+										Nhắn tin
+									</div>
+									<div class="col-12 bg-primary p-1 text-white rounded" style="margin-top: 1px;">
+										Nhắn tin qweq q eqw qweqwe qwe qweqw qweqwe qweqwe qeqwqwe  ưqeqwe
+									</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div>
-				<input type="text" class="w-100 border-0 border-top bg-light p-1" name="">
+				<input id="chatss" type="text" class="w-100 border border-bottom-0 border-left-0  border-right-0 bg-light p-2" name="" placeholder="Nhập tin nhắn...">
 			</div>
-		</div> -->
+			<div class="bg-white w-100 p-1">
+					<i class="far fa-file-image" style="font-size: 20px;color: #626871"></i>
+			</div>
+		</div>
+		<script>
+			$("#chatss").focus(function(){
+				$("#chats").css({"background-color":"#007bff","color":"white"});
+			});
+			$("#chatss").blur(function(){
+				$("#chats").css({"background-color":"#f5f6f7","color":"gray"});
+			});
+		</script>
 		<!-- End Chatbox -->
 
 		<!-- Chatbox -->
@@ -580,7 +656,7 @@
 			<div>
 				<input type="text" class="w-100 border-0 border-top bg-light p-1" name="">
 			</div>
-		</div> -->
+		</div>
 		<!-- End Chatbox -->
 
 	<script type="text/javascript" src="js/script.js"></script>

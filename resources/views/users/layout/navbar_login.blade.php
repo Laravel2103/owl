@@ -27,23 +27,29 @@
 								<h6 class="mb-0">Lời mời kết bạn</h6>
 							</div>
 							
+							@foreach($addfriends as $af)
+							@foreach($author as $at)
+							@if($af->user1 == $at->id)
 							<div class="col-12 border-bottom p-1">
 								<div class="row pl-2">
 									<div class="col-2 align-self-center">
 										<img src="img/avatar.png" class="img-fluid">
 									</div>
 									<div class="col-4">
-										<a href="">Xuân Trường</a>
+										<a href="">{{$at->username}}</a>
 										<p class="mb-0">2 bạn chung</p>
 									</div>
 									<div class="col-6 align-self-center">
-										<a href="" class="btn btn-success p-1">Chấp nhận</a>
-										<a href="" class="btn btn-danger p-1">Từ chối</a>
+										<a href="agreefriend={{$af->id}}" class="btn btn-success p-1">Chấp nhận</a>
+										<a href="unagreefriend={{$af->id}}" class="btn btn-danger p-1">Từ chối</a>
 									</div>
 								</div>
 							</div>
+							@endif
+							@endforeach
+							@endforeach
 
-							<div class="col-12 border-bottom p-1">
+							<!-- <div class="col-12 border-bottom p-1">
 								<div class="row pl-2">
 									<div class="col-2 align-self-center">
 										<img src="img/avatar.png" class="img-fluid">
@@ -109,7 +115,7 @@
 
 							<div class="col-12 align-seft-center">
 								<center><a href="" class="m-auto text-center">Xem tất cả</a></center>
-							</div>
+							</div> -->
 
 							<div class="col-12"></div>
 						</div>

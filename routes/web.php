@@ -46,3 +46,7 @@ Route::get('taobanbe','UserController@taobanbe');
 Route::get('addfriend{id_user}','UserController@AddFriend')->name('AddFriend');
 // Trang ca nhan
 Route::get('profile/id','UserController@Profile')->name('Profile');
+// Chap nhan mot loi moi ket ban
+Route::get('agreefriend={id_friend}','UserController@AgreeFriend')->name('AgreeFriend');
+// Tu choi mot loi moi ket ban
+Route::get('unagreeFriend={id_friend}','UserController@UnAgreeFriend')->name('UnAgreeFriend');
