@@ -12,7 +12,9 @@ use App\Status;
 use App\Comments;
 use App\Reviews;
 use App\Friends;
-
+use App\Messages;
+use App\Events\RedisEvent;
+use LRedis;
 //facebook,google
 use Socialite;
 
@@ -398,6 +400,54 @@ class UserController extends Controller
         Friends::where('_id',$id_friend)->update(['agree'=>true]);
 
         return redirect()->route('owl-index');
+    }
+
+    // Add Messages
+    public function AddMessage()
+    {
+        $message = new Messages;
+        $message->id_friend = '5c07e333fb3f8b1234007637';
+        $message->id_user = '5bfbbdbafb3f8b118c004202';
+        $message->content = 'Xin chào';
+        $message->save();
+
+        return ' Thêm tin nhắn thành công!';
+    }
+
+    public function AddMessages($id_friend, $content)
+    {
+        $message = new Messages;
+        $message->id_friend = $id_friend;
+        $message->id_user = session('iduser');
+        $message->content = $content;
+        $message->save();
+
+        $upcontent = "<div class='row m-0 justify-content-end mt-2'>
+                        <div class='col-9'>
+                            <div class='row'>
+                                <div class='col-12 bg-primary p-1 text-white rounded'>
+                                    ".$content."
+                                </div>
+                            </div>
+                        </div>
+                    </div>";
+        event(
+            $e = new RedisEvent($content)
+        );
+        return $upcontent;
+    }
+    // Khung chatbox
+    public function Chatbox($id_friend)
+    {
+        $messages = Messages::where('id_friend',$id_friend)->get();
+        return view('users.chatbox',['messages'=>$messages,'id_friend'=>$id_friend]);
+    }
+
+    // Them khung chatbox
+    public function AddChatbox($id_friend)
+    {
+        //$id = $id_friend;
+        return redirect()->route('Chatbox', ['id_friend' => $id_friend]);
     }
     
 }

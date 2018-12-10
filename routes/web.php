@@ -50,3 +50,11 @@ Route::get('profile/id','UserController@Profile')->name('Profile');
 Route::get('agreefriend={id_friend}','UserController@AgreeFriend')->name('AgreeFriend');
 // Tu choi mot loi moi ket ban
 Route::get('unagreeFriend={id_friend}','UserController@UnAgreeFriend')->name('UnAgreeFriend');
+// Khung chat box
+Route::get('chatbox{id_friend}','UserController@Chatbox')->name('Chatbox');
+// Them mot khung chat
+Route::get('addchatbox={id_friend}','UserController@AddChatbox')->name('AddChatbox');
+// // Tao tin nhan
+// Route::get('addmessage','UserController@AddMessage')->name('AddMessage');
+// Them tin nhan 
+Route::get('addmessages/{id_friend}/{content}','UserController@AddMessages')->name('AddMessages');
