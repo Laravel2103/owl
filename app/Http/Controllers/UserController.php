@@ -31,7 +31,13 @@ class UserController extends Controller
         $comment = Comments::all();
         $author = Users::all();
         $reviews = Reviews::all();
-        $friends = Friends::where('user1','=',session('iduser'))->orwhere('user2','=',session('iduser'))->get();
+        $friends = Friends::where([
+			['user1','=',session('iduser')],
+			['agree','=',true]
+		])->orwhere([
+			['user2','=',session('iduser')],
+			['agree','=',true]
+		])->get();
 
         $member = Users::where('_id','!=',session('iduser'))->get();
        
@@ -443,9 +449,9 @@ class UserController extends Controller
                             </div>
                         </div>
                     </div>";
-        event(
-            $e = new RedisEvent($content)
-        );
+        // event(
+        //     $e = new RedisEvent($content)
+        // );
         return $upcontent;
         //return '123';
     }

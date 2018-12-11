@@ -68,13 +68,13 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-			$("#chatss").focus(function(){
+			$('#message_content{{$id_friend}}').focus(function(){
 				$("#chats").css({"background-color":"#007bff","color":"white"});
 			});
-			$("#chatss").blur(function(){
+			$('#message_content{{$id_friend}}').blur(function(){
 				$("#chats").css({"background-color":"#f5f6f7","color":"gray"});
-            });
-            //$('#messagebox{{$id_friend}}').animate({ scrollTop: $('#boxmess".$mabanbe."').get(0).scrollHeight}, 0);
+			});
+            $('#messagebox{{$id_friend}}').animate({ scrollTop: $('#messagebox{{$id_friend}}').get(0).scrollHeight}, 0);
             $('#message_content{{$id_friend}}').keypress(function(event){
                 if(event.keyCode == 13 || event.which == 13)
                 {
@@ -93,7 +93,7 @@
                     //     alert(data);
                     // });
                     $('#message_content{{$id_friend}}').val('');
-                    //$('#messagebox{{$id_friend}}').animate({ scrollTop: $('#boxmess".$mabanbe."').get(0).scrollHeight}, 1500);
+                    $('#messagebox{{$id_friend}}').animate({ scrollTop: $('#messagebox{{$id_friend}}').get(0).scrollHeight}, 1500);
                     // setInterval(function(){
                     // ('#messagebox".$mabanbe."').load.fadeIn(data);},1000);
                     //alert(1);

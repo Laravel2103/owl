@@ -531,18 +531,17 @@
 		<!-- Hien thi 1 ban be -->
 		
 		@foreach($friends as $fr)
-		@if($fr->user1 == session('iduser') && $fr->agree == true)
+		@if($fr->user1 == session('iduser'))
 		<?php
 			$id_friend = $fr->user2;
 		?>
-		@elseif($fr->user2 == session('iduser') && $fr->agree == true)
+		@else
 		<?php
 			$id_friend = $fr->user1;
 		?>
 		@endif
-		@foreach($GoiYKetBan as $mb)
-		@if(!empty($id_friend))
-		@if($mb->id == $id_friend)
+		@foreach($author as $at)
+		@if($at->_id == $id_friend)
 		<a id="btn_friend{{$fr->id}}">
 			<div class="row ml-0 friends-online">
 				<div class="col-12">
@@ -551,7 +550,7 @@
 							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
 						</div>
 						<div class="col-6 col-xl-6 pl-0 align-self-center d-none d-lg-none d-xl-block">
-							<span>{{$mb->username}}</span>
+							<span>{{$at->username}}</span>
 						</div>
 						<div class="col-2 col-lg-2 col-xl-2 text-success align-self-center pl-0 online-button">
 							<i class="fa fa-circle"></i>
@@ -568,7 +567,6 @@
 				})
 			})
 		</Script>
-		@endif
 		@endif
 		@endforeach
 		@endforeach
