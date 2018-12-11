@@ -20,28 +20,40 @@ use Socialite;
 
 class UserController extends Controller
 {
-    //
-    // public function index()
-    // {
-    // 	return view("users.index");
-    // }
-    public function ViewHome()
+    
+    public function index()
     {
+    	return view("users.index");
+    }
+    public function ViewHome()
+     {
         $db = Status::orderBy('time','desc')->get();
         $comment = Comments::all();
         $author = Users::all();
         $reviews = Reviews::all();
-        $friends = Friends::where('user1',session('iduser'))->orwhere('user2',session('iduser'))->get();
-        $member = Users::all();
+        $friends = Friends::where('user1','=',session('iduser'))->orwhere('user2','=',session('iduser'))->get();
+
+        $member = Users::where('_id','!=',session('iduser'))->get();
        
         $addfriends = Friends::where([
-            ['user2',session('iduser')],
-            ['agree',false],
+            ['user2','=',session('iduser')],
+            ['agree','=',false],
         ])->get();
-        
+       
+        $test = 0;
+        $testfriends = Friends::all();
+        //kiem tra nguoi dung da co ban hay chua
+        foreach ($testfriends as $f) {
+            if(session('iduser')!= $f->user1 && session('iduser') != $f->user2 )
+            {
+                $test = 1;
+                return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'test'=>$test]);
+                // return var_dump($test);
+            }
+        }
 
-        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends]);
-
+        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'test'=>$test]);
+        // return var_dump($test);
     }
      //Xu ly thong tin dang nhap cua nguoi dung
     public function Login(Request $request)
@@ -206,7 +218,7 @@ class UserController extends Controller
         $email = $request->email;
         $password = $request->password;
         $repassword = $request->repassword;
-        if($password == $repassword && $password != "")
+        if($password == $repassword && $password != "" && $repassword != "")
         {
             //Them vao co so du lieu
             $db = new Users;
