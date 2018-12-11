@@ -436,17 +436,41 @@
 				<h4>Gợi ý kết bạn</h4>
 			</div>
 			@foreach($GoiYKetBan as $kb)
+			@if($test == 1)
+				<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
+					<div class="row">
+						<div class="col-2 m-2 pl-0 pr-0">
+							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
+						</div>
+						<div class="col-5 pl-0 align-self-center">
+							<a href="" class="align-bottom">{{$kb->username}}</a><br>
+							<span class="align-top" style="font-size: 11px">2 bạn chung</span>
+						</div>
+						<div class="col-2 align-self-center pl-0">
+							<button id="btnaddfriend{{$kb->id}}" class="btn btn-success p-1">Kết bạn</button>
+						</div>
+					</div>
+				</div>
+				<script type="text/javascript">
+					$('#btnaddfriend{{$kb->id}}').click(function(){
+						$.get('addfriend{{$kb->id}}',function(data){
+							//$('#box{{$kb->id}}').html(data);
+							alert(data);
+						});
+					});
+				</script>
+			@else
 			@foreach($friends as $fr)
-			@if($kb->id != $fr->user1 && $kb->id != $fr->user2 && $kb->id != session('iduser'))
+			@if($kb->_id != $fr->user1 && $kb->_id != $fr->user2)
 			<!-- Thong tin mot nguoi muon ket ban -->
-			<div class="col-12 bg-white rounded-top border" id="box{{$kb->id}}">
+			<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
 				<div class="row">
 					<div class="col-2 m-2 pl-0 pr-0">
 						<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
 					</div>
 					<div class="col-5 pl-0 align-self-center">
 						<a href="" class="align-bottom">{{$kb->username}}</a><br>
-						<span class="align-top" style="font-size: 11px">2 bạn chung</span>
+						<span class="align-top" style="font-size: 11px">2 bạn chungs</span>
 					</div>
 					<div class="col-2 align-self-center pl-0">
 						<button id="btnaddfriend{{$kb->id}}" class="btn btn-success p-1">Kết bạn</button>
@@ -461,9 +485,9 @@
 					});
 				});
 			</script>
-			<!-- Ket thuc thong tin mot nguoi muon ket ban -->
 			@endif
 			@endforeach
+			@endif
 			@endforeach
 		</div>
 		<!-- Ket thuc khung goi y ket ban -->
