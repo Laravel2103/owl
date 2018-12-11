@@ -1,6 +1,6 @@
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- Chatbox -->
-<div class="position-fixed shadow-sm" style="bottom: 0px; right: 18%; width: 260px;box-shadow: 0 0px 5px 0 rgba(0, 0, 0, .20) !important;">
+<div class="position-fixed shadow-sm" style="bottom: 0px; right: 18%; width: 260px;box-shadow: 0 0px 5px 0 rgba(0, 0, 0, .20) !important;" >
 			<div id="chats" class="rounded-top p-1 pl-2 border border-top-0 border-left-0  border-right-0" style="box-shadow: 0 4px 1px 0 rgba(0, 0, 0, .20) !important;background-color: #f5f6f7;z-index: 1032 !important">
 				<div class="row m-0">
 					<div class="col-9 pl-0 align-self-center">
@@ -63,7 +63,11 @@
 			</div>
 		</div>
 		<script>
-            
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 			$("#chatss").focus(function(){
 				$("#chats").css({"background-color":"#007bff","color":"white"});
 			});
@@ -79,7 +83,15 @@
                     $.get('addmessages/{{$id_friend}}/'+message,function(data){
                         $('#messagebox{{$id_friend}}').append(data);
                         //alert(data)
-                    });
+					});
+                    // $.post("addmessages",
+                    // {
+                    //     id_friend: "{{$id_friend}}",
+                    //     content: message
+                    // },
+                    // function(data){
+                    //     alert(data);
+                    // });
                     $('#message_content{{$id_friend}}').val('');
                     //$('#messagebox{{$id_friend}}').animate({ scrollTop: $('#boxmess".$mabanbe."').get(0).scrollHeight}, 1500);
                     // setInterval(function(){
@@ -87,8 +99,8 @@
                     //alert(1);
                 }
             });
-            // $('#xchatbox".$mabanbe."').click(function(){
-            //     $('#chatbox".$mabanbe."').hide();
+            // $('#xchatbox{{$id_friend}}').click(function(){
+            //     $('#chatboxroom{{$id_friend}}').hide();
             // });
 		</script>
 		<!-- End Chatbox -->

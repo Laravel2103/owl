@@ -58,3 +58,5 @@ Route::get('addchatbox={id_friend}','UserController@AddChatbox')->name('AddChatb
 // Route::get('addmessage','UserController@AddMessage')->name('AddMessage');
 // Them tin nhan 
 Route::get('addmessages/{id_friend}/{content}','UserController@AddMessages')->name('AddMessages');
+// Them tin nhan 
+Route::post('addmessages','UserController@AddMessages')->name('AddMessages');

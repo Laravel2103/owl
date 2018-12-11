@@ -435,6 +435,7 @@ class UserController extends Controller
             $e = new RedisEvent($content)
         );
         return $upcontent;
+        //return '123';
     }
     // Khung chatbox
     public function Chatbox($id_friend)

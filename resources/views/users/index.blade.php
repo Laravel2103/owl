@@ -517,6 +517,7 @@
 		?>
 		@endif
 		@foreach($GoiYKetBan as $mb)
+		@if(!empty($id_friend))
 		@if($mb->id == $id_friend)
 		<a id="btn_friend{{$fr->id}}">
 			<div class="row ml-0 friends-online">
@@ -543,6 +544,7 @@
 				})
 			})
 		</Script>
+		@endif
 		@endif
 		@endforeach
 		@endforeach
