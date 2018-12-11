@@ -21,7 +21,7 @@
 				<span class="badge badge-primary badge-pill ml-1">50</span></a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-0">
-				<a href="{{url('profileid{id_user}')}}" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân</a>
+				<a href="profileid{{session('iduser')}}" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân</a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-0">
 				<a href="" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân
@@ -570,11 +570,9 @@
 		</a>
 		<!-- Ket thuc hien thi mot ban be -->
 		<Script>
-			var countbox = 0;
 			$("#btn_friend{{$fr->id}}").click(function(){
-				$.get("addchatbox={{$fr->id}}="+countbox,function(data){
-					$("#chatbox").append(data);
-					countbox = countbox + 1;
+				$.get("addchatbox={{$fr->id}}",function(data){
+					$("#chatbox").html(data);
 				})
 			})
 		</Script>

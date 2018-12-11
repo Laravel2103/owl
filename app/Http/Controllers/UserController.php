@@ -401,19 +401,20 @@ class UserController extends Controller
     public function Profile($id_user)
     {
         //$user = Users::where('id',$id_user)->first;
-        $db = Status::where('author',session('iduser'))->orderBy('time','desc')->get();
+        $db = Status::where('author',$id_user)->orderBy('time','desc')->get();
         $comment = Comments::all();
         $author = Users::all();
         $reviews = Reviews::all();
         $member = Users::where([
-            ['_id','!=',session('iduser')],
+            ['_id','!=',$id_user],
         ])->take(5)->get();
         $addfriends = Friends::where([
-            ['user2','=',session('iduser')],
+            ['user2','=',$id_user],
             ['agree','=',false],
         ])->get();
-        
-        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member]);
+        $User_profile = Users::where('_id','=',$id_user)->first();
+
+        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'User_profile'=>$User_profile]);
     }
 
     // Chap nhan mot loi moi ket ban

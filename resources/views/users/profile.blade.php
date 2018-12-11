@@ -15,7 +15,7 @@
 				<span class="badge badge-primary badge-pill ml-1">50</span></a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-0">
-				<a href="{{url('profileid{id_user}')}}" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân</a>
+				<a href="profileid{{session('iduser')}}" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân</a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-0">
 				<a href="#" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân
@@ -41,7 +41,7 @@
 	<div class="col-lg-7 mt-5 pt-4">
 		<div style="position:relative">
 			<img src="img/banner3.jpg" alt="" class="img-fluid border">
-			<span style="position: absolute; bottom: 10px; left: 20px; font-size: 30px; font-weight:bold;">Xuân Trường</span>
+			<span style="position: absolute; bottom: 10px; left: 20px; font-size: 30px; font-weight:bold;">{{$User_profile->username}}</span>
 		</div>
 		<div class="row mr-0">
 			<!-- NewFeed -->
