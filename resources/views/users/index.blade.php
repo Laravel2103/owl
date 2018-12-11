@@ -7,6 +7,12 @@
 	<!-- MenuBar -->
 	<div class="col-lg-2 col-xl-2 d-none d-sm-none d-lg-block pr-0 ml-5 pl-5 mt-5 pt-4">
 		<ul class="list-group shadow-sm">
+			@if(empty(session('iduser')))
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-light">
+				<img src="img/owlup.png" class="img-thumbnail">
+			</li>
+			<h4>Khách xem</h4>
+			@else
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-light">
 				<img src="img/avatar.png" class="img-thumbnail">
 			</li>
@@ -33,6 +39,7 @@
 				<a href="#" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân
 				<span class="badge badge-primary badge-pill">99</span></a>
 			</li>
+			@endif
 		</ul>
 	</div>
 	<!-- End MenuBar -->
