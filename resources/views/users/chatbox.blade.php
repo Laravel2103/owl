@@ -4,7 +4,7 @@
 			<div id="chats" class="rounded-top p-1 pl-2 border border-top-0 border-left-0  border-right-0" style="box-shadow: 0 4px 1px 0 rgba(0, 0, 0, .20) !important;background-color: #f5f6f7;z-index: 1032 !important">
 				<div class="row m-0">
 					<div class="col-9 pl-0 align-self-center">
-						<i class="fa fa-circle text-success" style="font-size: 8px;"></i> <span>Xuan Truong</span>
+						<i class="fa fa-circle text-success" style="font-size: 8px;"></i> <a href="profile?id={{$fr->id}}">{{$fr->username}}</a>
 					</div>
 					<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button> -->
 					<div class="col-1">

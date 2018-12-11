@@ -408,8 +408,12 @@ class UserController extends Controller
         $member = Users::where([
             ['_id','!=',session('iduser')],
         ])->take(5)->get();
+        $addfriends = Friends::where([
+            ['user2','=',session('iduser')],
+            ['agree','=',false],
+        ])->get();
         
-        return view('users.profile',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member]);
+        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member]);
     }
 
     // Chap nhan mot loi moi ket ban
@@ -459,7 +463,17 @@ class UserController extends Controller
     public function Chatbox($id_friend)
     {
         $messages = Messages::where('id_friend',$id_friend)->get();
-        return view('users.chatbox',['messages'=>$messages,'id_friend'=>$id_friend]);
+        $friend = Friends::where('_id',$id_friend)->first();
+        if($friend->user1 == session('iduser'))
+        {
+            $idf = $friend->user2;
+        }
+        else
+        {
+            $idf = $friend->user1;
+        }
+        $fr = Users::where('_id',$idf)->first();
+        return view('users.chatbox',['messages'=>$messages,'id_friend'=>$id_friend,'fr'=>$fr]);
     }
 
     // Them khung chatbox

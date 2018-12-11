@@ -94,7 +94,7 @@
 						@foreach($author as $at)
 						@if($stt->author == $at->id)
 						<div  style="position: relavtive">
-							<a href="profile?id={{$at->id}}" id="authorname{{$stt->id}}">{{$at->username}}</a><br>
+							<a href="profileid{{$at->id}}" id="authorname{{$stt->id}}">{{$at->username}}</a><br>
 							<div id="authorshow{{$stt->id}}" class="bg-light rounded shadow-sm border p-3" style="position: absolute; top: -100px; left: 0px;display: none;">
 								<div class="row">
 									<div class="col-3">

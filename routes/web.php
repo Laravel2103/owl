@@ -59,4 +59,4 @@ Route::get('addmessages/{id_friend}/{content}','UserController@AddMessages')->na
 // Them tin nhan 
 Route::post('addmessages','UserController@AddMessages')->name('AddMessages');
 // Trang ca nhan cua mot nguoi
-Route::get('profile?id={id_user}','UserController@Profile')->name('Profile');
+Route::get('profileid{id_user}','UserController@Profile')->name('Profile');
