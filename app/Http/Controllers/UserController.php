@@ -460,7 +460,7 @@ class UserController extends Controller
         //return '123';
     }
     // Khung chatbox
-    public function Chatbox($id_friend)
+    public function Chatbox($id_friend,$countbox)
     {
         $messages = Messages::where('id_friend',$id_friend)->get();
         $friend = Friends::where('_id',$id_friend)->first();
@@ -473,14 +473,22 @@ class UserController extends Controller
             $idf = $friend->user1;
         }
         $fr = Users::where('_id',$idf)->first();
-        return view('users.chatbox',['messages'=>$messages,'id_friend'=>$id_friend,'fr'=>$fr]);
+        if($countbox == 0)
+        {
+            return view('users.chatbox',['messages'=>$messages,'id_friend'=>$id_friend,'fr'=>$fr]);
+        }
+        else
+        {
+            return view('users.chatbox2',['messages'=>$messages,'id_friend'=>$id_friend,'fr'=>$fr]);
+        }
+        
     }
 
     // Them khung chatbox
-    public function AddChatbox($id_friend)
+    public function AddChatbox($id_friend,$countbox)
     {
         //$id = $id_friend;
-        return redirect()->route('Chatbox', ['id_friend' => $id_friend]);
+        return redirect()->route('Chatbox', ['id_friend' => $id_friend,'countbox'=>$countbox]);
     }
     
 }

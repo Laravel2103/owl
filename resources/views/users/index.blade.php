@@ -563,9 +563,11 @@
 		</a>
 		<!-- Ket thuc hien thi mot ban be -->
 		<Script>
+			var countbox = 0;
 			$("#btn_friend{{$fr->id}}").click(function(){
-				$.get("addchatbox={{$fr->id}}",function(data){
-					$("#chatbox").html(data);
+				$.get("addchatbox={{$fr->id}}="+countbox,function(data){
+					$("#chatbox").append(data);
+					countbox = countbox + 1;
 				})
 			})
 		</Script>

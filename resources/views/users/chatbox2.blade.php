@@ -1,7 +1,8 @@
 
+
 <!-- Chatbox -->
-<div class="position-fixed shadow-sm" style="bottom: 0px; right: 18%; width: 260px;box-shadow: 0 0px 5px 0 rgba(0, 0, 0, .20) !important;" id="chatboxroom{{$id_friend}}">
-			<div id="chats{{$id_friend}}" class="rounded-top p-1 pl-2 border border-top-0 border-left-0  border-right-0" style="box-shadow: 0 4px 1px 0 rgba(0, 0, 0, .20) !important;background-color: #f5f6f7;z-index: 1032 !important">
+<div class="position-fixed shadow-sm" style="bottom: 0px; right: 38%; width: 260px;box-shadow: 0 0px 5px 0 rgba(0, 0, 0, .20) !important;" id="chatboxroom{{$id_friend}}">
+			<div id="chats" class="rounded-top p-1 pl-2 border border-top-0 border-left-0  border-right-0" style="box-shadow: 0 4px 1px 0 rgba(0, 0, 0, .20) !important;background-color: #f5f6f7;z-index: 1032 !important">
 				<div class="row m-0">
 					<div class="col-9 pl-0 align-self-center">
 						<i class="fa fa-circle text-success" style="font-size: 8px;"></i> <a href="profileid{{$fr->id}}">{{$fr->username}}</a>
@@ -68,10 +69,10 @@
                 }
             });
 			$('#message_content{{$id_friend}}').focus(function(){
-				$("#chats{{$id_friend}}").css({"background-color":"#007bff","color":"white"});
+				$("#chats").css({"background-color":"#007bff","color":"white"});
 			});
 			$('#message_content{{$id_friend}}').blur(function(){
-				$("#chats{{$id_friend}}").css({"background-color":"#f5f6f7","color":"gray"});
+				$("#chats").css({"background-color":"#f5f6f7","color":"gray"});
 			});
             $('#messagebox{{$id_friend}}').animate({ scrollTop: $('#messagebox{{$id_friend}}').get(0).scrollHeight}, 0);
             $('#message_content{{$id_friend}}').keypress(function(event){
