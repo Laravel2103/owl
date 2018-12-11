@@ -44,8 +44,6 @@ Route::get('postcomment{idstt}/{content}','UserController@PostComment')->name('P
 Route::get('taobanbe','UserController@taobanbe');
 // Ket ban voi mot nguoi ban
 Route::get('addfriend{id_user}','UserController@AddFriend')->name('AddFriend');
-// Trang ca nhan
-Route::get('profile/id','UserController@Profile')->name('Profile');
 // Chap nhan mot loi moi ket ban
 Route::get('agreefriend={id_friend}','UserController@AgreeFriend')->name('AgreeFriend');
 // Tu choi mot loi moi ket ban
@@ -60,3 +58,5 @@ Route::get('addchatbox={id_friend}','UserController@AddChatbox')->name('AddChatb
 Route::get('addmessages/{id_friend}/{content}','UserController@AddMessages')->name('AddMessages');
 // Them tin nhan 
 Route::post('addmessages','UserController@AddMessages')->name('AddMessages');
+// Trang ca nhan cua mot nguoi
+Route::get('profile?id={id_user}','UserController@Profile')->name('Profile');

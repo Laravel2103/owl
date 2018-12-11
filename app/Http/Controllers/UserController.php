@@ -398,7 +398,7 @@ class UserController extends Controller
         return '123';
     }
 
-    public function Profile()
+    public function Profile($id_user)
     {
         //$user = Users::where('id',$id_user)->first;
         $db = Status::where('author',session('iduser'))->orderBy('time','desc')->get();

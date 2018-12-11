@@ -94,7 +94,7 @@
 						@foreach($author as $at)
 						@if($stt->author == $at->id)
 						<div  style="position: relavtive">
-							<a href="" id="authorname{{$stt->id}}">{{$at->username}}</a><br>
+							<a href="profile?id={{$at->id}}" id="authorname{{$stt->id}}">{{$at->username}}</a><br>
 							<div id="authorshow{{$stt->id}}" class="bg-light rounded shadow-sm border p-3" style="position: absolute; top: -100px; left: 0px;display: none;">
 								<div class="row">
 									<div class="col-3">
@@ -430,6 +430,7 @@
 
 	<!-- Tag and New Friends -->
 	<div class="col-lg-2 col-xl-2 d-none d-md-none d-lg-block mt-5 pt-4">
+		@if(!empty(session('iduser')))
 		<!-- Khung goi y ket ban -->
 		<div class="row bg-light border shadow-sm rounded p-1">
 			<div class="col-12 text-info text-center">
@@ -491,6 +492,7 @@
 			@endforeach
 		</div>
 		<!-- Ket thuc khung goi y ket ban -->
+		@endif
 
 		<!-- Khung cac muc bai viet -->
 		<div class="row bg-light mt-3 shadow-sm rounded p-1 border">
