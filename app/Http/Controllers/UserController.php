@@ -27,7 +27,7 @@ class UserController extends Controller
     }
     public function ViewHome()
      {
-        $db = Status::orderBy('time','desc')->get();
+        $db = Status::orderBy('created_at','desc')->get();
         $comment = Comments::all();
         $author = Users::all();
         $reviews = Reviews::all();
@@ -401,7 +401,7 @@ class UserController extends Controller
     public function Profile($id_user)
     {
         //$user = Users::where('id',$id_user)->first;
-        $db = Status::where('author',$id_user)->orderBy('time','desc')->get();
+        $db = Status::where('author',$id_user)->orderBy('created_at','desc')->get();
         $comment = Comments::all();
         $author = Users::all();
         $reviews = Reviews::all();
