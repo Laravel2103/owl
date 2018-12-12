@@ -530,7 +530,7 @@
 		<!-- End Tag and New Friends -->
 	</div>
 
-	<div id="chatbox"></div>
+	<div id="chatbox" style="z-index: 9999"></div>
 	<!-- List Friend Online -->
 	<div class="col-lg-2 col-xl-2 bg-white h-100 position-fixed float-right pt-5 pl-0 pr-0 shadow-sm" style="z-index: 2; top:0px; right: 0px;">
 		<div class="pl-2 pt-3 pb-0 text-secondary border-bottom">
@@ -570,9 +570,11 @@
 		</a>
 		<!-- Ket thuc hien thi mot ban be -->
 		<Script>
+			var countbox = 0
 			$("#btn_friend{{$fr->id}}").click(function(){
-				$.get("addchatbox={{$fr->id}}",function(data){
-					$("#chatbox").html(data);
+				$.get("addchatbox={{$fr->id}}="+countbox,function(data){
+					$("#chatbox").append(data);
+					countbox = countbox +1;
 				})
 			})
 		</Script>
