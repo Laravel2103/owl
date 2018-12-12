@@ -57,13 +57,13 @@
 			<div class="bg-light rounded shadow-sm border">
 				<div class="row border-bottom mr-1 ml-1">
 					<div class="col-4 col-sm-4 border-right p-1 pl-2 text-center">
-						<a href="" class=""><i class="fa fa-pencil"></i> Đăng bài viết</a>
+						<a href="" class=""><i class="fas fa-edit"></i> Đăng bài viết</a>
 					</div>
 					<div class="col-5 col-sm-5 border-right p-1 pl-2 text-center">
 						<a href=""><i class="fa fa-image"></i> Album ảnh/ video</a>
 					</div>
 					<div class="col-3 col-sm-3 p-1 pl-2 text-center">
-						<a href=""><i class="fa fa-video-camera"></i> Trực tiếp</a>
+						<a href=""><i class="fas fa-video"></i> Trực tiếp</a>
 					</div>
 				</div>
 				<div class="row bg-white ml-1 mr-1 border-bottom mb-2">
@@ -101,7 +101,7 @@
 						@foreach($author as $at)
 						@if($stt->author == $at->id)
 						<div  style="position: relavtive">
-							<a href="profileid{{$at->id}}" id="authorname{{$stt->id}}">{{$at->username}}</a><br>
+							<a href="profileid{{$at->id}}" id="authorname{{$stt->id}}" class="font-weight-bold">{{$at->username}}</a><br>
 							<div id="authorshow{{$stt->id}}" class="bg-light rounded shadow-sm border p-3" style="position: absolute; top: -100px; left: 0px;display: none;">
 								<div class="row">
 									<div class="col-3">
@@ -194,8 +194,18 @@
 							}
 							?> <i class="fas fa-globe-americas"></i></span>
 					</div>
-					<div class="col-2">
-						<i class="fas fa-ellipsis-v float-right"></i>
+					<div class="col-2 dropdown">
+						<a data-toggle="dropdown"><i class="fas fa-ellipsis-h float-right"></i></a>
+						<div class="dropdown-menu w-25 rounded-0 border shadow-sm mt-3">
+							<div class="row m-0">
+								<div class="col-12 pl-3">
+									<a><i class="fas fa-bookmark"></i> Lưu bài viết</a>
+								</div>
+								<div class="col-12 pl-3">
+									<a><i class="fas fa-eye-slash"></i> Ẩn bài viết</a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 
