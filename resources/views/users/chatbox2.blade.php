@@ -100,8 +100,8 @@
                 }
             });
             $('#xchatbox{{$id_friend}}').click(function(){
-				$('#chatboxroom{{$id_friend}}').hide();
 				countbox = countbox - 1;
+				$('#chatboxroom{{$id_friend}}').remove();
             });
 		</script>
 		<!-- End Chatbox -->

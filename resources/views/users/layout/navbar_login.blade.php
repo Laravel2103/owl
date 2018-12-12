@@ -19,9 +19,9 @@
 				</li>
 				<!-- End Input Search -->
 				<!-- Icon Add Friends -->
-				<li class="nav-item col-1 pr-0 align-self-center" style="position: relative;">
-					<a  id="btnaddfriend"><i class="fa fa-user-plus fa-2x float-right"></i></a>
-					<div class="bg-white shadow-sm border" id="showaddfriend" style="position: absolute;bottom: -330px;left: -50px; width: 400px;display: none;">
+				<li class="nav-item col-1 pr-0 align-self-center dropdown text-center">
+					<a data-toggle="dropdown"><i class="fa fa-user-plus fa-2x "></i></a>
+					<div class="bg-white shadow-sm border dropdown-menu rounded-0 pt-0" style="margin-top: 12%;">
 						<div class="row p-0 m-0">
 							<div class="col-12 border-bottom p-1 align-self-center">
 								<h6 class="mb-0">Lời mời kết bạn</h6>

@@ -16,27 +16,27 @@
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-light">
 				<img src="img/avatar.png" class="img-thumbnail">
 			</li>
-			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-0">
-				<a href="{{url('/')}}" class="p-2 w-100"><i class="fa fa-home"></i> Trang chủ 
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1">
+				<a href="{{url('/')}}" class="p-2 w-100 text-dark"><i class="fa fa-home" style="color: #fd7e14"></i> Trang chủ 
 				<span class="badge badge-primary badge-pill ml-1">50</span></a>
 			</li>
-			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-0">
-				<a href="profileid{{session('iduser')}}" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân</a>
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1">
+				<a href="profileid{{session('iduser')}}" class="p-2 w-100 text-dark"><i class="fa fa-address-book" style="color: #20c997"></i> Trang cá nhân</a>
 			</li>
-			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-0">
-				<a href="" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
+				<a href="" class="p-2 w-100 text-dark"><i class="fas fa-school" style="color: #dc3545"></i> Học viện
 				<span class="badge badge-primary badge-pill">50</span></a>
 			</li>
-			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-0">
-				<a href="#" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
+				<a href="#" class="p-2 w-100 text-dark"><i class="fas fa-book-reader" style="color: #007bff"></i> Thư viện
 				<span class="badge badge-primary badge-pill">99</span></a>
 			</li>
-			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-0">
-				<a href="#" class="p-2 w-100"><i class="fa fa-address-book"></i> Trang cá nhân
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
+				<a href="#" class="p-2 w-100 text-dark"><i class="fa fa-cog" style="color: #6f42c1"></i> Cài đặt
 				<span class="badge badge-primary badge-pill">50</span></a>
 			</li>
-			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-0">
-				<a href="{{url('logout')}}" class="p-2 w-100"><i class="fa fa-address-book"></i> Đăng xuất
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
+				<a href="{{url('logout')}}" class="p-2 w-100 text-dark"><i class="fas fa-sign-out-alt" style="color: #dc3545"></i> Đăng xuất
 				</a>
 			</li>
 			@endif
