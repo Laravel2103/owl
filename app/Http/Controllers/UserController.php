@@ -103,6 +103,7 @@ class UserController extends Controller
         {
             session()->put('iduser',$login->id);
             session()->put('username',$login->username);
+            session()->put('avatar',$login->avatar);
             session()->put('email',$login->email);
             session()->put('password',$login->password);
             return redirect()->route('owl-index');
