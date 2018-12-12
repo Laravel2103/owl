@@ -49,13 +49,13 @@ class UserController extends Controller
         ])->get();
 
         $sl = 0;
-        $gykb;
+        $gykb = "";
         foreach($member as $mb)
         {
             if($sl <= 5)
             {
                 $flat = 0;
-                foreach($friends as $fr)
+                foreach($lmkb as $fr)
                 {
                     if($mb->id == $fr->user1 || $mb->id == $fr->user2)
                     {
@@ -85,7 +85,7 @@ class UserController extends Controller
         $avataruser = Users::where('_id','=',session('iduser'))->first();
                
         return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'gykb'=>$gykb,'avataruser'=>$avataruser]);
-        //return var_dump($gykb);
+        //return var_dump($lmkb);
     }
      //Xu ly thong tin dang nhap cua nguoi dung
     public function Login(Request $request)
@@ -405,7 +405,7 @@ class UserController extends Controller
     //
     //
     // Gui mot loi moi ket ban
-    public function addfriend($id_user)
+    public function AddFriend($id_user)
     {
         //$ss = session('iduser');
         $db = new Friends;
@@ -414,15 +414,16 @@ class UserController extends Controller
         $db->agree = false;
         $db->save();
 
-        $friends = Friends::where('user1','!=',session('iduser'))->orwhere('user1','!=',session('iduser'))->get();
+        //$friends = Friends::where('user1','!=',session('iduser'))->orwhere('user1','!=',session('iduser'))->get();
         
+        //$user = Users::where('id',$id_user)->first();
         // $member = Users::where([
         //     ['_id','!=',session('iduser')],
         //     ['_id','!=',$id_user]
         // ])->take(5)->get();
+        //$thanhcong = 'Đã gửi lời mời kết bạn đến'.$user->username;
 
-
-        return '123';
+        return 'Đã gửi lời mời kết bạn';
     }
 
     public function Profile($id_user)

@@ -68,7 +68,7 @@
 				</div>
 				<div class="row bg-white ml-1 mr-1 border-bottom mb-2">
 					<div class="col-md-2 col-sm-2 col-2 align-self-center pr-0">
-						<img src="img/avatar.jpg" width="38px" class="rounded-circle img-fluid">
+						<img src="img/{{session('avatar')}}" width="38px" class="rounded-circle img-fluid">
 					</div>
 					<div class="col-md-10 col-sm-10 col-10 pl-0 ">
 						<textarea class="w-100 pl-0 pr-3 pt-3 pb-3" id="status" placeholder="Bạn đang nghĩ gì vậy?" rows="1" onkeyup="getVal();" name="contentstt"></textarea>
@@ -472,7 +472,7 @@
 				<div class="list-group-item list-group-item-action p-1" id="box{{$kb->_id}}">
 					<div class="row m-0">
 						<div class="col-2 m-2 pl-0 pr-0">
-							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
+							<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
 						</div>
 						<div class="col-5 pl-0 align-self-center">
 							<a href="" class="align-bottom">{{$kb->username}}</a><br>
