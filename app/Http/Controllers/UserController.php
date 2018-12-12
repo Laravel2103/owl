@@ -37,7 +37,9 @@ class UserController extends Controller
 		])->orwhere([
 			['user2','=',session('iduser')],
 			['agree','=',true]
-		])->get();
+        ])->get();
+        
+        $lmkb = Friends::where('user1','=',session('iduser'))->orwhere('user2','=',session('iduser'))->get();
 
         $member = Users::where('_id','!=',session('iduser'))->get();
        
@@ -45,23 +47,43 @@ class UserController extends Controller
             ['user2','=',session('iduser')],
             ['agree','=',false],
         ])->get();
-        
-        $us = Users::where('_id','=',session('iduser'))->first();
 
-        $test = 0;
-        $testfriends = Friends::all();
-        //kiem tra nguoi dung da co ban hay chua
-        foreach ($testfriends as $f) {
-            if(session('iduser')!= $f->user1 && session('iduser') != $f->user2 )
+        $sl = 0;
+        $gykb;
+        foreach($member as $mb)
+        {
+            if($sl <= 5)
             {
-                $test = 1;
-                return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'test'=>$test,'us'=>$us]);
-                // return var_dump($test);
+                $flat = 0;
+                foreach($friends as $fr)
+                {
+                    if($mb->id == $fr->user1 || $mb->id == $fr->user2)
+                    {
+                        $flat = 1;
+                    }
+                }
+                if($flat != 1)
+                {
+                    if($sl == 0 )
+                        {
+                            $gykb[$sl] = $mb;
+                            $sl++;
+                        }
+                        elseif($mb->id != $gykb[$sl-1]->id)
+                        {
+                            $gykb[$sl] = $mb;
+                            $sl++;
+                        }
+                }
+            }
+            else
+            {
+                break;
             }
         }
 
-        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'test'=>$test,'us'=>$us]);
-        // return var_dump($test);
+        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'gykb'=>$gykb]);
+        //return var_dump($gykb);
     }
      //Xu ly thong tin dang nhap cua nguoi dung
     public function Login(Request $request)
