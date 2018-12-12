@@ -8,7 +8,7 @@
 	<div class="col-lg-2 col-xl-2 d-none d-sm-none d-lg-block pr-0 ml-5 pl-5 mt-5 pt-4">
 		<ul class="list-group shadow-sm">
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-light">
-				<img src="img/avatar.png" class="img-thumbnail">
+				<img src="img/{{$User_profile->avatar}}" class="img-thumbnail">
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-0">
 				<a href="{{url('/')}}" class="p-2 w-100"><i class="fa fa-home"></i> Trang chủ 
@@ -95,17 +95,17 @@
 					<div class="pt-3 pr-3 pl-3">
 						<div class="row">
 							<div class="col-2 pr-0 avatar-post align-self-center">
-								<img src="img/avatar.png" alt="" class="rounded-circle img-fluid shadow-sm w-75">
+								<img src="img/{{$User_profile->avatar}}" alt="" class="rounded-circle img-fluid shadow-sm w-75">
 							</div>
 							<div class="col-8 pl-0">
 								@foreach($author as $at)
 								@if($stt->author == $at->id)
 								<div  style="position: relavtive">
-									<a href="" id="authorname{{$stt->id}}">{{$at->username}}</a><br>
+									<a href="profileid{{$at->id}}" id="authorname{{$stt->id}}">{{$at->username}}</a><br>
 									<div id="authorshow{{$stt->id}}" class="bg-light rounded shadow-sm border p-3" style="position: absolute; top: -100px; left: 0px;display: none;">
 										<div class="row">
 											<div class="col-3">
-												<img src="img/avatar.png" alt="" class="img-fluid">
+												<img src="img/{{$at->avatar}}" alt="" class="img-fluid">
 											</div>
 											<div class="col-5">
 												<span>{{$at->username}}</span>
@@ -337,16 +337,17 @@
 							<div id="comment{{$stt->id}}">
 								@foreach($comment as $cmt)
 								@if($cmt->idstt == $stt->id)
+								@foreach($author as $at)
+								@if($at->id == $cmt->author)
 								<div class="row mt-2 pr-3">
 									<div class="col-2 pr-1">
-										<img src="img/avatar.png" class="img-thumbnail w-90 rounded">
+										<img src="img/{{$at->avatar}}" class="img-thumbnail w-90 rounded">
 									</div>
 									<div class="col-10 pr-4 w-100 pb-1 bg-light border rounded  comment-content">
 										<div class="row justify-content-between">
 											<div class="col-10 col-sm-10 col-lg-10">
 												<a href="" class="name-in-comment">
-												@foreach($author as $at)
-												@if($at->id == $cmt->author)
+												
 													{{$at->username}}
 												@endif
 												@endforeach
@@ -435,11 +436,11 @@
 						<h4>Gợi ý kết bạn</h4>
 					</div>
 					@foreach($GoiYKetBan as $kb)
-					<!-- Thong tin mot nguoi muon ket ban -->
-					<div class="col-12 bg-white rounded-top border" id="box{{$kb->id}}">
+					@if($test == 1)
+					<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
 						<div class="row">
 							<div class="col-2 m-2 pl-0 pr-0">
-								<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
+								<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
 							</div>
 							<div class="col-5 pl-0 align-self-center">
 								<a href="" class="align-bottom">{{$kb->username}}</a><br>
@@ -458,8 +459,36 @@
 							});
 						});
 					</script>
-					<!-- Ket thuc thong tin mot nguoi muon ket ban -->
-					@endforeach
+				@else
+				@foreach($friends as $fr)
+				@if($kb->_id != $fr->user1 && $kb->_id != $fr->user2)
+				<!-- Thong tin mot nguoi muon ket ban -->
+				<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
+					<div class="row">
+						<div class="col-2 m-2 pl-0 pr-0">
+							<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
+						</div>
+						<div class="col-5 pl-0 align-self-center">
+							<a href="" class="align-bottom">{{$kb->username}}</a><br>
+							<span class="align-top" style="font-size: 11px">2 bạn chungs</span>
+						</div>
+						<div class="col-2 align-self-center pl-0">
+							<button id="btnaddfriend{{$kb->id}}" class="btn btn-success p-1">Kết bạn</button>
+						</div>
+					</div>
+				</div>
+				<script type="text/javascript">
+					$('#btnaddfriend{{$kb->id}}').click(function(){
+						$.get('addfriend{{$kb->id}}',function(data){
+							//$('#box{{$kb->id}}').html(data);
+							alert(data);
+						});
+					});
+				</script>
+				@endif
+				@endforeach
+				@endif
+				@endforeach
 				</div>
 				<!-- Ket thuc khung goi y ket ban -->
 
@@ -501,15 +530,28 @@
 			<h5 class="d-block d-lg-block d-xl-none">Chatbox</h5>
 		</div>
 		<!-- Hien thi 1 ban be -->
-		<a href="">
+		
+		@foreach($friends as $fr)
+		@if($fr->user1 == session('iduser'))
+		<?php
+			$id_friend = $fr->user2;
+		?>
+		@else
+		<?php
+			$id_friend = $fr->user1;
+		?>
+		@endif
+		@foreach($author as $at)
+		@if($at->_id == $id_friend)
+		<a id="btn_friend{{$fr->id}}">
 			<div class="row ml-0 friends-online">
 				<div class="col-12">
 					<div class="row">
 						<div class="col-3 col-lg-6 col-xl-3 pr-0 align-middle mt-1 mb-1 mr-2">
-							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
+							<img src="img/{{$at->avatar}}" class="img-fluid w-100 rounded-circle">
 						</div>
 						<div class="col-6 col-xl-6 pl-0 align-self-center d-none d-lg-none d-xl-block">
-							<span>Xuân Trường</span>
+							<span>{{$at->username}}</span>
 						</div>
 						<div class="col-2 col-lg-2 col-xl-2 text-success align-self-center pl-0 online-button">
 							<i class="fa fa-circle"></i>
@@ -519,25 +561,20 @@
 			</div>
 		</a>
 		<!-- Ket thuc hien thi mot ban be -->
+		<Script>
+			var countbox = 0
+			$("#btn_friend{{$fr->id}}").click(function(){
+				$.get("addchatbox={{$fr->id}}="+countbox,function(data){
+					$("#chatbox").append(data);
+					countbox = countbox +1;
+				})
+			})
+		</Script>
+		@endif
+		@endforeach
+		@endforeach
 
-		<!-- Hien thi 1 ban be -->
-		<a href="">
-			<div class="row ml-0 friends-online">
-				<div class="col-12">
-					<div class="row">
-						<div class="col-3 col-lg-6 col-xl-3 pr-0 align-middle mt-1 mb-1 mr-2">
-							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
-						</div>
-						<div class="col-6 col-xl-6 pl-0 align-self-center d-none d-lg-none d-xl-block">
-							<span>Xuân Trường</span>
-						</div>
-						<div class="col-2 col-lg-2 col-xl-2 text-success align-self-center pl-0 online-button">
-							<i class="fa fa-circle"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-		</a>
+
 
 		<div class="row align-items-end position-fixed bg-light p-0 ml-0" style=" bottom: 0px;">
 			<div class="col-2 pr-0 text-secondary align-middle pb-1">
@@ -591,6 +628,8 @@
 			</div>
 		</div> -->
 		<!-- End Chatbox -->
+
+
 
 	<script type="text/javascript" src="js/script.js"></script>
 @endsection

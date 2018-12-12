@@ -14,7 +14,7 @@
 			<h4>Khách xem</h4>
 			@else
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-light">
-				<img src="img/avatar.png" class="img-thumbnail">
+				<img src="img/{{$us->avatar}}" class="img-thumbnail">
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1">
 				<a href="{{url('/')}}" class="p-2 w-100 text-dark"><i class="fa fa-home" style="color: #fd7e14"></i> Trang chủ 
@@ -90,22 +90,23 @@
 	
 		<!-- Mot bai status -->
 		@foreach($status as $stt)
-		<div class="post bg-white rounded shadow-sm border z-3 mt-3">
+		@foreach($author as $at)
+			@if($stt->author == $at->id)
+			<div class="post bg-white rounded shadow-sm border z-3 mt-3">
 			<!-- Thong tin tac gia -->
 			<div class="pt-3 pr-3 pl-3">
 				<div class="row">
 					<div class="col-2 pr-0 avatar-post align-self-center">
-						<img src="img/avatar.png" alt="" class="rounded-circle img-fluid w-75">
+						<img src="img/{{$at->avatar}}" alt="" class="rounded-circle img-fluid shadow-sm w-75">
 					</div>
 					<div class="col-8 pl-0">
-						@foreach($author as $at)
-						@if($stt->author == $at->id)
+						
 						<div  style="position: relavtive">
 							<a href="profileid{{$at->id}}" id="authorname{{$stt->id}}">{{$at->username}}</a><br>
 							<div id="authorshow{{$stt->id}}" class="bg-light rounded shadow-sm border p-3" style="position: absolute; top: -100px; left: 0px;display: none;">
 								<div class="row">
 									<div class="col-3">
-										<img src="img/avatar.png" alt="" class="img-fluid">
+										<img src="img/{{$at->avatar}}" alt="" class="img-fluid">
 									</div>
 									<div class="col-5">
 										<span>{{$at->username}}</span>
@@ -345,16 +346,17 @@
 					<div id="comment{{$stt->id}}">
 						@foreach($comment as $cmt)
 						@if($cmt->idstt == $stt->id)
+						@foreach($author as $at)
+						@if($at->id == $cmt->author)
 						<div class="row mt-2 pr-3">
 							<div class="col-2 pr-1">
-								<img src="img/avatar.png" class="img-thumbnail w-90 rounded">
+								<img src="img/{{$at->avatar}}" class="img-thumbnail w-90 rounded">
 							</div>
 							<div class="col-10 pr-4 w-100 pb-1 bg-light border rounded  comment-content">
 								<div class="row justify-content-between">
 									<div class="col-10 col-sm-10 col-lg-10">
 										<a href="" class="name-in-comment">
-										@foreach($author as $at)
-										@if($at->id == $cmt->author)
+										
 											{{$at->username}}
 										@endif
 										@endforeach
@@ -448,7 +450,7 @@
 				<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
 					<div class="row">
 						<div class="col-2 m-2 pl-0 pr-0">
-							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
+							<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
 						</div>
 						<div class="col-5 pl-0 align-self-center">
 							<a href="" class="align-bottom">{{$kb->username}}</a><br>
@@ -474,7 +476,7 @@
 			<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
 				<div class="row">
 					<div class="col-2 m-2 pl-0 pr-0">
-						<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
+						<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
 					</div>
 					<div class="col-5 pl-0 align-self-center">
 						<a href="" class="align-bottom">{{$kb->username}}</a><br>
@@ -556,7 +558,7 @@
 				<div class="col-12">
 					<div class="row">
 						<div class="col-3 col-lg-6 col-xl-3 pr-0 align-middle mt-1 mb-1 mr-2">
-							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
+							<img src="img/{{$at->avatar}}" class="img-fluid w-100 rounded-circle">
 						</div>
 						<div class="col-6 col-xl-6 pl-0 align-self-center d-none d-lg-none d-xl-block">
 							<span>{{$at->username}}</span>

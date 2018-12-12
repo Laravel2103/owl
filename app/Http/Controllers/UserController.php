@@ -45,7 +45,9 @@ class UserController extends Controller
             ['user2','=',session('iduser')],
             ['agree','=',false],
         ])->get();
-       
+        
+        $us = Users::where('_id','=',session('iduser'))->first();
+
         $test = 0;
         $testfriends = Friends::all();
         //kiem tra nguoi dung da co ban hay chua
@@ -53,12 +55,12 @@ class UserController extends Controller
             if(session('iduser')!= $f->user1 && session('iduser') != $f->user2 )
             {
                 $test = 1;
-                return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'test'=>$test]);
+                return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'test'=>$test,'us'=>$us]);
                 // return var_dump($test);
             }
         }
 
-        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'test'=>$test]);
+        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'test'=>$test,'us'=>$us]);
         // return var_dump($test);
     }
      //Xu ly thong tin dang nhap cua nguoi dung
@@ -413,8 +415,28 @@ class UserController extends Controller
             ['agree','=',false],
         ])->get();
         $User_profile = Users::where('_id','=',$id_user)->first();
+        
+        $friends = Friends::where([
+            ['user1','=',session('iduser')],
+            ['agree','=',true]
+        ])->orwhere([
+            ['user2','=',session('iduser')],
+            ['agree','=',true]
+        ])->get();
 
-        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'User_profile'=>$User_profile]);
+        $test = 0;
+        $testfriends = Friends::all();
+        //kiem tra nguoi dung da co ban hay chua
+        foreach ($testfriends as $f) {
+            if(session('iduser')!= $f->user1 && session('iduser') != $f->user2 )
+            {
+                $test = 1;
+                        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'User_profile'=>$User_profile,'friends'=>$friends,'test'=>$test]);
+                // return var_dump($test);
+            }
+        }
+
+        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'User_profile'=>$User_profile,'friends'=>$friends,'test'=>$test]);
     }
 
     // Chap nhan mot loi moi ket ban
