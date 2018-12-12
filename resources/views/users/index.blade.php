@@ -16,7 +16,7 @@
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-light">
 				<img src="img/avatar.png" class="img-thumbnail">
 			</li>
-			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1">
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1 bg-light font-weight-bold">
 				<a href="{{url('/')}}" class="p-2 w-100 text-dark"><i class="fa fa-home" style="color: #fd7e14"></i> Trang chủ 
 				<span class="badge badge-primary badge-pill ml-1">50</span></a>
 			</li>
@@ -332,7 +332,19 @@
 								// alert(data);
 							});
 							$("#cmtcontent{{$stt->id}}").val('');	
-
+						});
+						$("#cmtcontent{{$stt->id}}").keypress(function(event){
+							if(event.keyCode == 13 || event.which == 13)
+                			{
+								event.preventDefault();
+								var content = $("#cmtcontent{{$stt->id}}").val();
+								$.get("postcomment{{$stt->id}}/"+content,
+									function(data){
+										$("#comment{{$stt->id}}").prepend(data);
+									// alert(data);
+								});
+								$("#cmtcontent{{$stt->id}}").val('');
+							}	
 						});
 						$("#comment-btn{{$stt->id}}").click(function(){
 							
@@ -443,10 +455,11 @@
 			<div class="col-12 text-info text-center">
 				<h4>Gợi ý kết bạn</h4>
 			</div>
+			<div class="list-group">
 			@foreach($GoiYKetBan as $kb)
 			@if($test == 1)
-				<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
-					<div class="row">
+				<div class="list-group-item list-group-item-action p-1" id="box{{$kb->_id}}">
+					<div class="row m-0">
 						<div class="col-2 m-2 pl-0 pr-0">
 							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
 						</div>
@@ -471,8 +484,8 @@
 			@foreach($friends as $fr)
 			@if($kb->_id != $fr->user1 && $kb->_id != $fr->user2)
 			<!-- Thong tin mot nguoi muon ket ban -->
-			<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
-				<div class="row">
+			<div class="list-group-item list-group-item-action p-1" id="box{{$kb->_id}}">
+				<div class="row m-0">
 					<div class="col-2 m-2 pl-0 pr-0">
 						<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
 					</div>
@@ -497,6 +510,7 @@
 			@endforeach
 			@endif
 			@endforeach
+			</div>
 		</div>
 		<!-- Ket thuc khung goi y ket ban -->
 		@endif
