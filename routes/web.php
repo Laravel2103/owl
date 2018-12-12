@@ -111,3 +111,7 @@ Route::prefix("admin")->middleware('adminmiddle')->group(function(){
 	//Route sua 1 binh luan
 	Route::post('editcomment','AdminController@EditComment')->name('editcomment');
 });
+    //Route trang cai dat ca nhan
+	Route::get('settup','UserController@Settup')->name('settup');
+	//Route cai dat thong tin ca nhan
+	Route::post('postsettup','UserController@PostSettup')->name('postsettup');

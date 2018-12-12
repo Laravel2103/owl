@@ -561,4 +561,85 @@ class UserController extends Controller
         return redirect()->route('Chatbox', ['id_friend' => $id_friend,'countbox'=>$countbox]);
     }
     
+    public function Settup()
+    {
+        $author = Users::all();
+        $member = Users::where([
+            ['_id','!=',session('iduser')],
+        ])->take(5)->get();
+        $addfriends = Friends::where([
+            ['user2','=',session('iduser')],
+            ['agree','=',false],
+        ])->get();
+        $User_Settup = Users::where('_id','=',session('iduser'))->first();
+        
+        $friends = Friends::where([
+            ['user1','=',session('iduser')],
+            ['agree','=',true]
+        ])->orwhere([
+            ['user2','=',session('iduser')],
+            ['agree','=',true]
+        ])->get();
+
+        $sl = 0;
+        $gykb;
+        foreach($member as $mb)
+        {
+            if($sl <= 5)
+            {
+                $flat = 0;
+                foreach($friends as $fr)
+                {
+                    if($mb->id == $fr->user1 || $mb->id == $fr->user2)
+                    {
+                        $flat = 1;
+                    }
+                }
+                if($flat != 1)
+                {
+                    if($sl == 0 )
+                        {
+                            $gykb[$sl] = $mb;
+                            $sl++;
+                        }
+                        elseif($mb->id != $gykb[$sl-1]->id)
+                        {
+                            $gykb[$sl] = $mb;
+                            $sl++;
+                        }
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+
+
+
+        return view('users.settup',['author'=>$author,'addfriends'=>$addfriends,'GoiYKetBan'=>$member,'User_Settup'=>$User_Settup,'friends'=>$friends,'gykb'=>$gykb]);
+    }
+    public function PostSettup(Request $request)
+    {
+        if($request->hasFile('anhdaidien'))
+        {
+                $name = $request->file('anhdaidien')->getClientOriginalName();
+                $request->file('anhdaidien')->move('img',$name);
+        }
+        else
+        {
+                $member = Users::where('_id','=',session('iduser'))->first();
+                $name = $member->avatar;
+        }
+        Users::where('_id','=',session('iduser'))->update([
+                'username' => $request['tenthanhvien'],
+                'password' => $request['matkhau'],
+                'email' => $request['email'],
+                'avatar' => $name,
+                'ngaysinh' => $request['ngaygio'],
+                'diachi' => $request['diachi']
+        ]);
+
+        return redirect()->route('settup');
+    }
 }
