@@ -82,7 +82,9 @@ class UserController extends Controller
             }
         }
 
-        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'gykb'=>$gykb]);
+        $avataruser = Users::where('_id','=',session('iduser'))->first();
+               
+        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'gykb'=>$gykb,'avataruser'=>$avataruser]);
         //return var_dump($gykb);
     }
      //Xu ly thong tin dang nhap cua nguoi dung

@@ -14,7 +14,7 @@
 			<h4>Khách xem</h4>
 			@else
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-light">
-				<img src="img/avatar.png" class="img-thumbnail">
+				<img src="img/{{$avataruser->avatar}}" class="img-thumbnail">
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1 bg-light font-weight-bold">
 				<a href="{{url('/')}}" class="p-2 w-100 text-dark"><i class="fa fa-home" style="color: #fd7e14"></i> Trang chủ 
