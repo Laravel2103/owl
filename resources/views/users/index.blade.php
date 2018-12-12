@@ -16,7 +16,7 @@
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-light">
 				<img src="img/{{$us->avatar}}" class="img-thumbnail">
 			</li>
-			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1">
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1 bg-light font-weight-bold">
 				<a href="{{url('/')}}" class="p-2 w-100 text-dark"><i class="fa fa-home" style="color: #fd7e14"></i> Trang chủ 
 				<span class="badge badge-primary badge-pill ml-1">50</span></a>
 			</li>
@@ -57,13 +57,13 @@
 			<div class="bg-light rounded shadow-sm border">
 				<div class="row border-bottom mr-1 ml-1">
 					<div class="col-4 col-sm-4 border-right p-1 pl-2 text-center">
-						<a href="" class=""><i class="fa fa-pencil"></i> Đăng bài viết</a>
+						<a href="" class=""><i class="fas fa-edit"></i> Đăng bài viết</a>
 					</div>
 					<div class="col-5 col-sm-5 border-right p-1 pl-2 text-center">
 						<a href=""><i class="fa fa-image"></i> Album ảnh/ video</a>
 					</div>
 					<div class="col-3 col-sm-3 p-1 pl-2 text-center">
-						<a href=""><i class="fa fa-video-camera"></i> Trực tiếp</a>
+						<a href=""><i class="fas fa-video"></i> Trực tiếp</a>
 					</div>
 				</div>
 				<div class="row bg-white ml-1 mr-1 border-bottom mb-2">
@@ -102,7 +102,7 @@
 					<div class="col-8 pl-0">
 						
 						<div  style="position: relavtive">
-							<a href="profileid{{$at->id}}" id="authorname{{$stt->id}}">{{$at->username}}</a><br>
+							<a href="profileid{{$at->id}}" id="authorname{{$stt->id}}" class="font-weight-bold">{{$at->username}}</a><br>
 							<div id="authorshow{{$stt->id}}" class="bg-light rounded shadow-sm border p-3" style="position: absolute; top: -100px; left: 0px;display: none;">
 								<div class="row">
 									<div class="col-3">
@@ -195,8 +195,18 @@
 							}
 							?> <i class="fas fa-globe-americas"></i></span>
 					</div>
-					<div class="col-2">
-						<i class="fas fa-ellipsis-v float-right"></i>
+					<div class="col-2 dropdown">
+						<a data-toggle="dropdown"><i class="fas fa-ellipsis-h float-right"></i></a>
+						<div class="dropdown-menu w-25 rounded-0 border shadow-sm mt-3">
+							<div class="row m-0">
+								<div class="col-12 pl-3">
+									<a><i class="fas fa-bookmark"></i> Lưu bài viết</a>
+								</div>
+								<div class="col-12 pl-3">
+									<a><i class="fas fa-eye-slash"></i> Ẩn bài viết</a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -333,7 +343,19 @@
 								// alert(data);
 							});
 							$("#cmtcontent{{$stt->id}}").val('');	
-
+						});
+						$("#cmtcontent{{$stt->id}}").keypress(function(event){
+							if(event.keyCode == 13 || event.which == 13)
+                			{
+								event.preventDefault();
+								var content = $("#cmtcontent{{$stt->id}}").val();
+								$.get("postcomment{{$stt->id}}/"+content,
+									function(data){
+										$("#comment{{$stt->id}}").prepend(data);
+									// alert(data);
+								});
+								$("#cmtcontent{{$stt->id}}").val('');
+							}	
 						});
 						$("#comment-btn{{$stt->id}}").click(function(){
 							
@@ -445,10 +467,11 @@
 			<div class="col-12 text-info text-center">
 				<h4>Gợi ý kết bạn</h4>
 			</div>
+			<div class="list-group">
 			@foreach($GoiYKetBan as $kb)
 			@if($test == 1)
-				<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
-					<div class="row">
+				<div class="list-group-item list-group-item-action p-1" id="box{{$kb->_id}}">
+					<div class="row m-0">
 						<div class="col-2 m-2 pl-0 pr-0">
 							<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
 						</div>
@@ -473,8 +496,8 @@
 			@foreach($friends as $fr)
 			@if($kb->_id != $fr->user1 && $kb->_id != $fr->user2)
 			<!-- Thong tin mot nguoi muon ket ban -->
-			<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
-				<div class="row">
+			<div class="list-group-item list-group-item-action p-1" id="box{{$kb->_id}}">
+				<div class="row m-0">
 					<div class="col-2 m-2 pl-0 pr-0">
 						<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
 					</div>
@@ -499,6 +522,7 @@
 			@endforeach
 			@endif
 			@endforeach
+			</div>
 		</div>
 		<!-- Ket thuc khung goi y ket ban -->
 		@endif
