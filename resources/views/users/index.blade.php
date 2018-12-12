@@ -14,7 +14,7 @@
 			<h4>Khách xem</h4>
 			@else
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-light">
-				<img src="img/{{$us->avatar}}" class="img-thumbnail">
+				<img src="img/avatar.png" class="img-thumbnail">
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1 bg-light font-weight-bold">
 				<a href="{{url('/')}}" class="p-2 w-100 text-dark"><i class="fa fa-home" style="color: #fd7e14"></i> Trang chủ 
@@ -468,12 +468,11 @@
 				<h4>Gợi ý kết bạn</h4>
 			</div>
 			<div class="list-group">
-			@foreach($GoiYKetBan as $kb)
-			@if($test == 1)
+			@foreach($gykb as $kb)
 				<div class="list-group-item list-group-item-action p-1" id="box{{$kb->_id}}">
 					<div class="row m-0">
 						<div class="col-2 m-2 pl-0 pr-0">
-							<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
+							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
 						</div>
 						<div class="col-5 pl-0 align-self-center">
 							<a href="" class="align-bottom">{{$kb->username}}</a><br>
@@ -492,35 +491,6 @@
 						});
 					});
 				</script>
-			@else
-			@foreach($friends as $fr)
-			@if($kb->_id != $fr->user1 && $kb->_id != $fr->user2)
-			<!-- Thong tin mot nguoi muon ket ban -->
-			<div class="list-group-item list-group-item-action p-1" id="box{{$kb->_id}}">
-				<div class="row m-0">
-					<div class="col-2 m-2 pl-0 pr-0">
-						<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
-					</div>
-					<div class="col-5 pl-0 align-self-center">
-						<a href="" class="align-bottom">{{$kb->username}}</a><br>
-						<span class="align-top" style="font-size: 11px">2 bạn chungs</span>
-					</div>
-					<div class="col-2 align-self-center pl-0">
-						<button id="btnaddfriend{{$kb->id}}" class="btn btn-success p-1">Kết bạn</button>
-					</div>
-				</div>
-			</div>
-			<script type="text/javascript">
-				$('#btnaddfriend{{$kb->id}}').click(function(){
-					$.get('addfriend{{$kb->id}}',function(data){
-						//$('#box{{$kb->id}}').html(data);
-						alert(data);
-					});
-				});
-			</script>
-			@endif
-			@endforeach
-			@endif
 			@endforeach
 			</div>
 		</div>
@@ -555,6 +525,8 @@
 		</div>
 		<!-- End Tag and New Friends -->
 	</div>
+
+
 
 	<div id="chatbox" style="z-index: 9999"></div>
 	<!-- List Friend Online -->
