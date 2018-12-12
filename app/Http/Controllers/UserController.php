@@ -82,7 +82,9 @@ class UserController extends Controller
             }
         }
 
-        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'gykb'=>$gykb]);
+        $avataruser = Users::where('_id','=',session('iduser'))->first();
+               
+        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'gykb'=>$gykb,'avataruser'=>$avataruser]);
         //return var_dump($gykb);
     }
      //Xu ly thong tin dang nhap cua nguoi dung
@@ -447,19 +449,41 @@ class UserController extends Controller
             ['agree','=',true]
         ])->get();
 
-        $test = 0;
-        $testfriends = Friends::all();
-        //kiem tra nguoi dung da co ban hay chua
-        foreach ($testfriends as $f) {
-            if(session('iduser')!= $f->user1 && session('iduser') != $f->user2 )
+        $sl = 0;
+        $gykb;
+        foreach($member as $mb)
+        {
+            if($sl <= 5)
             {
-                $test = 1;
-                        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'User_profile'=>$User_profile,'friends'=>$friends,'test'=>$test]);
-                // return var_dump($test);
+                $flat = 0;
+                foreach($friends as $fr)
+                {
+                    if($mb->id == $fr->user1 || $mb->id == $fr->user2)
+                    {
+                        $flat = 1;
+                    }
+                }
+                if($flat != 1)
+                {
+                    if($sl == 0 )
+                        {
+                            $gykb[$sl] = $mb;
+                            $sl++;
+                        }
+                        elseif($mb->id != $gykb[$sl-1]->id)
+                        {
+                            $gykb[$sl] = $mb;
+                            $sl++;
+                        }
+                }
+            }
+            else
+            {
+                break;
             }
         }
 
-        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'User_profile'=>$User_profile,'friends'=>$friends,'test'=>$test]);
+        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'User_profile'=>$User_profile,'friends'=>$friends,'gykb'=>$gykb]);
     }
 
     // Chap nhan mot loi moi ket ban

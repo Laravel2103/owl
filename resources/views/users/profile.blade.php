@@ -442,60 +442,32 @@
 					<div class="col-12 text-info text-center">
 						<h4>Gợi ý kết bạn</h4>
 					</div>
-					@foreach($GoiYKetBan as $kb)
-					@if($test == 1)
-					<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
-						<div class="row">
-							<div class="col-2 m-2 pl-0 pr-0">
-								<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
-							</div>
-							<div class="col-5 pl-0 align-self-center">
-								<a href="" class="align-bottom">{{$kb->username}}</a><br>
-								<span class="align-top" style="font-size: 11px">2 bạn chung</span>
-							</div>
-							<div class="col-2 align-self-center pl-0">
-								<button id="btnaddfriend{{$kb->id}}" class="btn btn-success p-1">Kết bạn</button>
+					<div class="list-group">
+					@foreach($gykb as $kb)
+						<div class="list-group-item list-group-item-action p-1" id="box{{$kb->_id}}">
+							<div class="row m-0">
+								<div class="col-2 m-2 pl-0 pr-0">
+									<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
+								</div>
+								<div class="col-5 pl-0 align-self-center">
+									<a href="" class="align-bottom">{{$kb->username}}</a><br>
+									<span class="align-top" style="font-size: 11px">2 bạn chung</span>
+								</div>
+								<div class="col-2 align-self-center pl-0">
+									<button id="btnaddfriend{{$kb->id}}" class="btn btn-success p-1">Kết bạn</button>
+								</div>
 							</div>
 						</div>
-					</div>
-					<script type="text/javascript">
-						$('#btnaddfriend{{$kb->id}}').click(function(){
-							$.get('addfriend{{$kb->id}}',function(data){
-								//$('#box{{$kb->id}}').html(data);
-								alert(data);
+						<script type="text/javascript">
+							$('#btnaddfriend{{$kb->id}}').click(function(){
+								$.get('addfriend{{$kb->id}}',function(data){
+									//$('#box{{$kb->id}}').html(data);
+									alert(data);
+								});
 							});
-						});
-					</script>
-				@else
-				@foreach($friends as $fr)
-				@if($kb->_id != $fr->user1 && $kb->_id != $fr->user2)
-				<!-- Thong tin mot nguoi muon ket ban -->
-				<div class="col-12 bg-white rounded-top border" id="box{{$kb->_id}}">
-					<div class="row">
-						<div class="col-2 m-2 pl-0 pr-0">
-							<img src="img/{{$kb->avatar}}" class="img-fluid w-100 rounded-circle">
-						</div>
-						<div class="col-5 pl-0 align-self-center">
-							<a href="" class="align-bottom">{{$kb->username}}</a><br>
-							<span class="align-top" style="font-size: 11px">2 bạn chungs</span>
-						</div>
-						<div class="col-2 align-self-center pl-0">
-							<button id="btnaddfriend{{$kb->id}}" class="btn btn-success p-1">Kết bạn</button>
-						</div>
+						</script>
+					@endforeach
 					</div>
-				</div>
-				<script type="text/javascript">
-					$('#btnaddfriend{{$kb->id}}').click(function(){
-						$.get('addfriend{{$kb->id}}',function(data){
-							//$('#box{{$kb->id}}').html(data);
-							alert(data);
-						});
-					});
-				</script>
-				@endif
-				@endforeach
-				@endif
-				@endforeach
 				</div>
 				<!-- Ket thuc khung goi y ket ban -->
 
