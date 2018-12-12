@@ -60,7 +60,10 @@ Route::get('addmessages/{id_friend}/{content}','UserController@AddMessages')->na
 Route::post('addmessages','UserController@AddMessages')->name('AddMessages');
 // Trang ca nhan cua mot nguoi
 Route::get('profileid{id_user}','UserController@Profile')->name('Profile');
-
+//Route trang cai dat ca nhan
+Route::get('setting','UserController@Settup')->name('setting');
+//Route cai dat thong tin ca nhan
+Route::post('postsettup','UserController@PostSettup')->name('postsetting');
 
 //Route trang dang nhap admin/login
 	Route::get('admin/login{error?}',function($error = ""){
@@ -111,7 +114,4 @@ Route::prefix("admin")->middleware('adminmiddle')->group(function(){
 	//Route sua 1 binh luan
 	Route::post('editcomment','AdminController@EditComment')->name('editcomment');
 });
-    //Route trang cai dat ca nhan
-	Route::get('settup','UserController@Settup')->name('settup');
-	//Route cai dat thong tin ca nhan
-	Route::post('postsettup','UserController@PostSettup')->name('postsettup');
+    

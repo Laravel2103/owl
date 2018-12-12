@@ -52,29 +52,29 @@
 
 	<!-- NewFeed -->
 	<div class="col-lg-8 col-xl-8 col-sm-12 mt-3 ml-lg-0 mr-lg-0 ml-sm-5">
-		<div class="settup">
-			<h3> Cài đặt thông tin</h3>
+		<div class="settup bg-white shadow-sm border pb-3">
+			<h3 class="p-2 mb-0 pl-4"><i class="fas fa-cogs"></i> Cài đặt thông tin</h3>
 			<hr>
-			<form action="{{route('postsettup')}}" method="post" enctype="multipart/form-data">
-				<table>
+			<form action="{{route('postsetting')}}" method="post" enctype="multipart/form-data">
+				<table class="ml-3 mr-3 w-90">
 					<tr>
-						<td><i class="fa fa-address-book-o"></i> Tên thành viên: </td>
-						<td><input type="text" name="tenthanhvien" placeholder="Tên thành viên" value="{{$User_Settup->username}}"></td>
+						<td><i class="fas fa-user-tie"></i> Tên thành viên: </td>
+						<td><input type="text" name="tenthanhvien" placeholder="Tên thành viên" value="{{$User_Settup->username}}" class="form-control"></td>
 					</tr>
 					<tr>
 						<td><i class="fa fa-key"></i> Mật khẩu: </td>
-						<td><input type="password" name="matkhau" value="{{$User_Settup->password}}"></td>
+						<td><input type="password" name="matkhau" value="{{$User_Settup->password}}" class="form-control"></td>
 					</tr>
 					<tr>
-						<td><i class="fa fa-envelope-o"></i> Email: </td>
-						<td><input type="email" name="email" placeholder="email" value="{{$User_Settup->email}}"></td>
+						<td><i class="fas fa-envelope"></i> Email: </td>
+						<td><input type="email" name="email" placeholder="email" value="{{$User_Settup->email}}" class="form-control"></td>
 					</tr>
 				</table>
 				<hr>
-				<table>
+				<table class="ml-3 mr-3 w-90 mb-3">
 					<tr>
 						<td width="185px;"><i class="fa fa-camera-retro"></i> Ảnh đại diện:</td>
-						<td><input type="file" name="anhdaidien">
+						<td><input type="file" name="anhdaidien" class="form-control">
 							<img src="img/{{$User_Settup->avatar}}" width="100px" height="100px">
 						</td>
 					</tr>
@@ -84,14 +84,14 @@
                                     $date = date_create($User_Settup->ngaysinh);
                                     $date2 = date_format($date,"Y-m-d");
                                     echo $date2;
-                                ?>"></td>
+                                ?>" class="form-control"></td>
 					</tr>
 					<tr>
 						<td><i class="fa fa-street-view"></i> Địa chỉ:</td>
-						<td><textarea name="diachi" value="{{$User_Settup->diachi}}"></textarea></td>
+						<td><textarea name="diachi" value="{{$User_Settup->diachi}}" class="form-control"></textarea></td>
 					</tr>
 				</table>
-				<input type="submit" name="submit" value="Chấp nhận">
+				<input type="submit" name="submit" value="Chấp nhận" class="btn btn-primary w-100 rounded-0">
 			</form>
 		</div>
 	</div>

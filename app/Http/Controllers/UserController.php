@@ -49,7 +49,6 @@ class UserController extends Controller
         ])->get();
 
         $sl = 0;
-        $gykb = "";
         foreach($member as $mb)
         {
             if($sl <= 5)
@@ -83,8 +82,15 @@ class UserController extends Controller
         }
 
         $avataruser = Users::where('_id','=',session('iduser'))->first();
-               
-        return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'gykb'=>$gykb,'avataruser'=>$avataruser]);
+        if(empty($gykb))
+        {
+            return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'avataruser'=>$avataruser]);
+        }
+        else
+        {
+            return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'gykb'=>$gykb,'avataruser'=>$avataruser]);
+        }
+        
         //return var_dump($lmkb);
     }
      //Xu ly thong tin dang nhap cua nguoi dung

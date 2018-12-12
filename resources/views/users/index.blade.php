@@ -32,7 +32,7 @@
 				<span class="badge badge-primary badge-pill">99</span></a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
-				<a href="{{url('settup')}}" class="p-2 w-100 text-dark"><i class="fa fa-cog" style="color: #6f42c1"></i> Cài đặt
+				<a href="{{route('setting')}}" class="p-2 w-100 text-dark"><i class="fa fa-cog" style="color: #6f42c1"></i> Cài đặt
 				<span class="badge badge-primary badge-pill">50</span></a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
@@ -468,6 +468,7 @@
 				<h4>Gợi ý kết bạn</h4>
 			</div>
 			<div class="list-group">
+			@if(!empty($gykb))
 			@foreach($gykb as $kb)
 				<div class="list-group-item list-group-item-action p-1" id="box{{$kb->_id}}">
 					<div class="row m-0">
@@ -486,12 +487,13 @@
 				<script type="text/javascript">
 					$('#btnaddfriend{{$kb->id}}').click(function(){
 						$.get('addfriend{{$kb->id}}',function(data){
-							//$('#box{{$kb->id}}').html(data);
+							$('#box{{$kb->id}}').remove();
 							alert(data);
 						});
 					});
 				</script>
 			@endforeach
+			@endif
 			</div>
 		</div>
 		<!-- Ket thuc khung goi y ket ban -->
