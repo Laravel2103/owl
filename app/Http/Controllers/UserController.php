@@ -31,6 +31,7 @@ class UserController extends Controller
         $comment = Comments::all();
         $author = Users::all();
         $reviews = Reviews::all();
+        $message = Messages::where('id_user','=',session('iduser'))->get();
         $friends = Friends::where([
 			['user1','=',session('iduser')],
 			['agree','=',true]
@@ -84,11 +85,11 @@ class UserController extends Controller
         $avataruser = Users::where('_id','=',session('iduser'))->first();
         if(empty($gykb))
         {
-            return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'avataruser'=>$avataruser]);
+            return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'avataruser'=>$avataruser,'message'=>$message]);
         }
         else
         {
-            return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'gykb'=>$gykb,'avataruser'=>$avataruser]);
+            return view('users.index',['status'=>$db,'author'=>$author,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'addfriends'=>$addfriends,'friends'=>$friends,'gykb'=>$gykb,'avataruser'=>$avataruser,'message'=>$message]);
         }
         
         //return var_dump($lmkb);
@@ -439,6 +440,7 @@ class UserController extends Controller
         $comment = Comments::all();
         $author = Users::all();
         $reviews = Reviews::all();
+        $message = Messages::where('id_user','=',session('iduser'))->get();
         $member = Users::where([
             ['_id','!=',$id_user],
         ])->take(5)->get();
@@ -489,8 +491,14 @@ class UserController extends Controller
                 break;
             }
         }
-
-        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'User_profile'=>$User_profile,'friends'=>$friends,'gykb'=>$gykb]);
+        if(empty($gykb))
+        {
+            return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'User_profile'=>$User_profile,'friends'=>$friends,'message'=>$message]);
+        }
+        else
+        {
+        return view('users.profile',['status'=>$db,'author'=>$author,'addfriends'=>$addfriends,'comment'=>$comment,'reviews'=>$reviews,'GoiYKetBan'=>$member,'User_profile'=>$User_profile,'friends'=>$friends,'gykb'=>$gykb,'message'=>$message]);
+        }
     }
 
     // Chap nhan mot loi moi ket ban
@@ -570,6 +578,7 @@ class UserController extends Controller
     
     public function Settup()
     {
+        $message = Messages::where('id_user','=',session('iduser'))->get();
         $author = Users::all();
         $member = Users::where([
             ['_id','!=',session('iduser')],
@@ -622,9 +631,14 @@ class UserController extends Controller
             }
         }
 
-
-
-        return view('users.settup',['author'=>$author,'addfriends'=>$addfriends,'GoiYKetBan'=>$member,'User_Settup'=>$User_Settup,'friends'=>$friends,'gykb'=>$gykb]);
+        if(empty($gykb))
+        {
+            return view('users.settup',['author'=>$author,'addfriends'=>$addfriends,'GoiYKetBan'=>$member,'User_Settup'=>$User_Settup,'friends'=>$friends,'message'=>$message]);
+        }
+        else
+        {
+            return view('users.settup',['author'=>$author,'addfriends'=>$addfriends,'GoiYKetBan'=>$member,'User_Settup'=>$User_Settup,'friends'=>$friends,'gykb'=>$gykb,'message'=>$message]);
+        }
     }
     public function PostSettup(Request $request)
     {
