@@ -20,7 +20,7 @@
 				<a href="{{url('/')}}" class="p-2 w-100 text-dark"><i class="fa fa-home" style="color: #fd7e14"></i> Trang chủ 
 				<span class="badge badge-primary badge-pill ml-1">50</span></a>
 			</li>
-			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1 bg-light font-weight-bold">
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center test p-1 ">
 				<a href="profileid{{session('iduser')}}" class="p-2 w-100 text-dark"><i class="fa fa-address-book" style="color: #20c997"></i> Trang cá nhân</a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
@@ -31,9 +31,8 @@
 				<a href="#" class="p-2 w-100 text-dark"><i class="fas fa-book-reader" style="color: #007bff"></i> Thư viện
 				<span class="badge badge-primary badge-pill">99</span></a>
 			</li>
-			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
-				<a href="{{url('settup')}}" class="p-2 w-100 text-dark"><i class="fa fa-cog" style="color: #6f42c1"></i> Cài đặt
-				<span class="badge badge-primary badge-pill">50</span></a>
+			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1 bg-light font-weight-bold">
+				<a href="{{url('settup')}}" class="p-2 w-100 text-dark"><i class="fa fa-cog" style="color: #6f42c1"></i> Cài đặt</a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
 				<a href="{{url('logout')}}" class="p-2 w-100 text-dark"><i class="fas fa-sign-out-alt" style="color: #dc3545"></i> Đăng xuất
@@ -52,7 +51,7 @@
 
 	<!-- NewFeed -->
 	<div class="col-lg-8 col-xl-8 col-sm-12 mt-3 ml-lg-0 mr-lg-0 ml-sm-5">
-		<div class="settup bg-white shadow-sm border pb-3">
+		<div class="settup bg-white shadow-sm border pb-3 rounded">
 			<h3 class="p-2 mb-0 pl-4"><i class="fas fa-cogs"></i> Cài đặt thông tin</h3>
 			<hr>
 			<form action="{{route('postsetting')}}" method="post" enctype="multipart/form-data">
