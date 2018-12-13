@@ -61,23 +61,20 @@
 								<h6 class="mb-0">Tin nhắn</h6>
 							</div>
 							
-							@foreach($addfriends as $af)
+							@foreach($message as $ms)
 							@foreach($author as $at)
-							@if($af->user1 == $at->id)
+							@if($ms->id_user == $at->_id)
 							<div class="col-12 border-bottom p-1">
 								<div class="row pl-2">
 									<div class="col-2 align-self-center">
-										<img src="img/avatar.png" class="img-fluid">
+										<img src="img/{{$at->avatar}}" class="img-fluid">
 									</div>
 									<div class="col-4">
 										<a href="">{{$at->username}}</a>
-										<p class="mb-0">2 bạn chung</p>
-									</div>
-									<div class="col-6 align-self-center">
-										<a href="agreefriend={{$af->id}}" class="btn btn-success p-1">Chấp nhận</a>
-										<a href="unagreefriend={{$af->id}}" class="btn btn-danger p-1">Từ chối</a>
-									</div>
+										<p class="mb-0">{{$ms->content}}</p>
+									</div>									
 								</div>
+
 							</div>
 							@endif
 							@endforeach

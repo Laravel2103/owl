@@ -68,7 +68,7 @@
 				</div>
 				<div class="row bg-white ml-1 mr-1 border-bottom mb-2">
 					<div class="col-md-2 col-sm-2 col-2 align-self-center pr-0">
-						<img src="img/{{session('avatar')}}" width="38px" class="rounded-circle img-fluid">
+						<img src="img/{{$avataruser->avatar}}" width="38px" class="rounded-circle img-fluid">
 					</div>
 					<div class="col-md-10 col-sm-10 col-10 pl-0 ">
 						<textarea class="w-100 pl-0 pr-3 pt-3 pb-3" id="status" placeholder="Bạn đang nghĩ gì vậy?" rows="1" onkeyup="getVal();" name="contentstt"></textarea>

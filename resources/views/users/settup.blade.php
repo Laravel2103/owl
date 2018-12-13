@@ -165,6 +165,7 @@
 		</div>
 	</div>
 
+	<div id="chatbox" style="z-index: 9999"></div>
 	<!-- List Friend Online -->
 	<div class="col-lg-2 col-xl-2 bg-white h-100 position-fixed float-right pt-5 pl-0 pr-0 shadow-sm" style="z-index: 2; top:0px; right: 0px;">
 		<div class="pl-2 pt-3 pb-0 text-secondary border-bottom">
@@ -216,7 +217,24 @@
 		@endforeach
 		@endforeach
 
-
+		<!-- Hien thi 1 ban be -->
+		<!-- <a href="">
+			<div class="row ml-0 friends-online">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-3 col-lg-6 col-xl-3 pr-0 align-middle mt-1 mb-1 mr-2">
+							<img src="img/avatar.jpg" class="img-fluid w-100 rounded-circle">
+						</div>
+						<div class="col-6 col-xl-6 pl-0 align-self-center d-none d-lg-none d-xl-block">
+							<span>Xuân Trường</span>
+						</div>
+						<div class="col-2 col-lg-2 col-xl-2 text-success align-self-center pl-0 online-button">
+							<i class="fa fa-circle"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a> -->
 
 		<div class="row align-items-end position-fixed bg-light p-0 ml-0" style=" bottom: 0px;">
 			<div class="col-2 pr-0 text-secondary align-middle pb-1">
@@ -232,25 +250,7 @@
 	
 	<!-- End Body -->
 
-	<!-- Chatbox -->
-		<!-- <div class="position-fixed shadow-sm" style="bottom: 0px; right: 18%; z-index: 9; width: 260px;">
-			<div class="rounded-top bg-primary p-1 shadow-sm">
-				Xuan Truong
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			</div>
-			<div class="bg-white p-1 shadow-sm" style="height: 300px">
-				qưewqe<br>
-				bg-primary<br>
-				qưewqe<br>
-				bg-primary<br>
-				qưewqe<br>
-				bg-primary<br>
-			</div>
-			<div>
-				<input type="text" class="w-100 border-0 border-top bg-light p-1" name="">
-			</div>
-		</div> -->
-		<!-- End Chatbox -->
+	
 
 		<!-- Chatbox -->
 		<!-- <div class="position-fixed shadow-sm" style="bottom: 0px; right: 38%; z-index: 9; width: 260px;">
@@ -268,10 +268,8 @@
 			<div>
 				<input type="text" class="w-100 border-0 border-top bg-light p-1" name="">
 			</div>
-		</div> -->
+		</div>
 		<!-- End Chatbox -->
-
-
 
 	<script type="text/javascript" src="js/script.js"></script>
 @endsection
