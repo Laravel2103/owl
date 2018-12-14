@@ -32,7 +32,7 @@
 				<span class="badge badge-primary badge-pill">99</span></a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
-				<a href="{{url('settup')}}" class="p-2 w-100 text-dark"><i class="fa fa-cog" style="color: #6f42c1"></i> Cài đặt
+				<a href="{{url('setting')}}" class="p-2 w-100 text-dark"><i class="fa fa-cog" style="color: #6f42c1"></i> Cài đặt
 				<span class="badge badge-primary badge-pill">50</span></a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
@@ -64,13 +64,13 @@
 					<div class="bg-light rounded shadow-sm border">
 						<div class="row border-bottom mr-1 ml-1">
 							<div class="col-4 col-sm-4 border-right p-1 pl-2 text-center">
-								<a href="" class=""><i class="fa fa-pencil"></i> Đăng bài viết</a>
+								<a href="" class=""><i class="fas fa-edit"></i> Đăng bài viết</a>
 							</div>
 							<div class="col-5 col-sm-5 border-right p-1 pl-2 text-center">
 								<a href=""><i class="fa fa-image"></i> Album ảnh/ video</a>
 							</div>
 							<div class="col-3 col-sm-3 p-1 pl-2 text-center">
-								<a href=""><i class="fa fa-video-camera"></i> Trực tiếp</a>
+								<a href=""><i class="fas fa-video"></i> Trực tiếp</a>
 							</div>
 						</div>
 						<div class="row bg-white ml-1 mr-1 border-bottom mb-2">

@@ -32,7 +32,7 @@
 				<span class="badge badge-primary badge-pill">99</span></a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1 bg-light font-weight-bold">
-				<a href="{{url('settup')}}" class="p-2 w-100 text-dark"><i class="fa fa-cog" style="color: #6f42c1"></i> Cài đặt</a>
+				<a href="{{url('setting')}}" class="p-2 w-100 text-dark"><i class="fa fa-cog" style="color: #6f42c1"></i> Cài đặt</a>
 			</li>
 			<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1">
 				<a href="{{url('logout')}}" class="p-2 w-100 text-dark"><i class="fas fa-sign-out-alt" style="color: #dc3545"></i> Đăng xuất

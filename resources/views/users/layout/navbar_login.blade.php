@@ -1,5 +1,5 @@
 <!-- Navbar -->
-	<nav class="navbar navbar-expand-sm bg-owl shadow-sm fixed-top">
+	<nav class="navbar navbar-expand bg-owl shadow-sm fixed-top">
 		<div class="container">
 			<!-- Nav -->
 			<ul class="navbar-nav row w-100 justify-content-between">
@@ -8,8 +8,12 @@
 					<a class="" href=""><img src="img/logo8.png" class="img-fluid w-70" id="logo" alt="Owl Study"></a>
 				</li>
 				<!-- End logo -->
+				<!-- Toggler/collapsibe Button -->
+  				
+    				<span class="navbar-toggler-icon d-block d-sm-block d-md-none"></span>
+
 				<!-- Input Search -->
-				<li class="nav-item col-6 mr-5 pr-5">
+				<li class="nav-item col-6 mr-5 pr-5 d-none d-sm-block mr-sm-0 pr-sm-2">
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text border-0" style="background-color: white !important;"><i class="fa fa-search"></i></span>
@@ -117,7 +121,7 @@
 						</div>
 					</div>
 				</li>
-				<li class="nav-item col-1 align-self-center dropdown text-center">
+				<li class="nav-item col-1 align-self-center dropdown text-center d-none d-sm-none d-md-block">
 					<a data-toggle="dropdown"><img src="img/avatar.jpg" class=" rounded-circle img-fluid float-right w-55"></a>
 					<div class="dropdown-menu rounded-0 bg-white shadow-sm border" style="margin-top: 11%;">
 						<div class="row">

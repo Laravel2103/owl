@@ -20,7 +20,7 @@
 	<!-- End Javascript -->
 </head>
 <body>
-	<img src="img/owlup.png" class="position-fixed" width="100px" style="left: -10px; bottom: 10px;">
+	<img src="img/owlup.png" class="position-fixed d-none d-md-none d-lg-block" width="100px" style="left: -10px; bottom: 10px;">
 	@if(!empty(session('iduser')))
 		@include('users.layout.navbar_login')
 	@else

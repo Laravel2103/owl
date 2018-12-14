@@ -45,7 +45,7 @@
 	<!-- End MenuBar -->
 
 	<!-- NewFeed -->
-	<div class="col-lg-5 col-xl-5 col-sm-12 mt-5 pt-4 ml-lg-0 mr-lg-0 ml-sm-5">
+	<div class="col-lg-5 col-xl-5 col-sm-12 mt-5 pt-4 ml-lg-0 mr-lg-0 ml-sm-3 ml-3">
 		<!-- Khung soan thao bai viet -->
 		<form action="{{route('UpStt')}}" method="post" enctype="multipart/form-data">
 			{{ csrf_field() }}
@@ -92,7 +92,7 @@
 		@foreach($status as $stt)
 		@foreach($author as $at)
 			@if($stt->author == $at->id)
-			<div class="post bg-white rounded shadow-sm border z-3 mt-3">
+			<div class="post bg-white rounded shadow-sm border z-3 mt-3" id="status{{$stt->id}}">
 			<!-- Thong tin tac gia -->
 			<div class="pt-3 pr-3 pl-3">
 				<div class="row">
@@ -203,7 +203,7 @@
 									<a><i class="fas fa-bookmark"></i> Lưu bài viết</a>
 								</div>
 								<div class="col-12 pl-3">
-									<a><i class="fas fa-eye-slash"></i> Ẩn bài viết</a>
+									<a id="hidestt{{$stt->id}}"><i class="fas fa-eye-slash"></i> Ẩn bài viết</a>
 								</div>
 							</div>
 						</div>
@@ -315,7 +315,9 @@
 							$("#danhgiashow{{$stt->id}}").hide();
 						});
 					});
-					
+					$("#hidestt{{$stt->id}}").click(function(){
+						$("#status{{$stt->id}}").hide(1000);
+					});
 				</script>
 				<div id="comment-box{{$stt->id}}">
 
@@ -532,7 +534,7 @@
 
 	<div id="chatbox" style="z-index: 9999"></div>
 	<!-- List Friend Online -->
-	<div class="col-lg-2 col-xl-2 bg-white h-100 position-fixed float-right pt-5 pl-0 pr-0 shadow-sm" style="z-index: 2; top:0px; right: 0px;">
+	<div class="col-lg-2 col-xl-2 d-none d-md-none d-lg-block bg-white h-100 position-fixed float-right pt-5 pl-0 pr-0 shadow-sm" style="z-index: 2; top:0px; right: 0px;">
 		<div class="pl-2 pt-3 pb-0 text-secondary border-bottom">
 			<h5 class="d-none d-lg-none d-xl-block">Danh sách bạn bè</h5>
 			<h5 class="d-block d-lg-block d-xl-none">Chatbox</h5>
